@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Gluten-Free</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="image-container">
+        <img src="/image/specialdiets/glutenfree.jpg" alt="Image" />
+        <div class="centered-text">
+            <div class="large-text">Gluten-Free</div>
+            <div class="small-text">Learn about Gluten-Free diets with articles, meal plans and recipes from
+                CleanBites' food and nutrition experts.
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search Recipes or Articles">
+    </div>
+
+    <div class="recipe-grid">
+        <a href="/news/studies_experts/Artikel_studies1.html">
+            <div class="recipe-card" data-title="Gluten-Free Diet: Necessary for Everyone?">
+                <img src="/image/news/studies/studies&experts.jpg" alt="Gluten-Free Diet: Necessary for Everyone?" />
+                <div class="recipe-info">
+                    <p class="time">Studies & Experts</p>
+                    <h2>Gluten-Free Diet: Necessary for Everyone?</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/appetizers/teriyaki_lettuce_wraps.html">
+            <div class="recipe-card" data-title="Teriyaki Mushroom Lettuce Wraps">
+                <img src="/image/healthyrecipes/appetizers/lettucewraps.jpg" alt="Teriyaki Mushroom Lettuce Wraps" />
+                <div class="recipe-info">
+                    <p class="time">35 minutes</p>
+                    <h2>Teriyaki Mushroom Lettuce Wraps</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/appetizers/vegan_nachos.html">
+            <div class="recipe-card" data-title="Vegan Nachos">
+                <img src="/image/healthyrecipes/appetizers/vegannachos.jpg" alt="Vegan Nachos" />
+                <div class="recipe-info">
+                    <p class="time">35 minutes</p>
+                    <h2>Vegan Nachos</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/breakfast/chia_pudding.html">
+            <div class="recipe-card" data-title="Chia Pudding">
+                <img src="/image/healthyrecipes/breakfast/chiapudding.jpg" alt="Chia Pudding" />
+                <div class="recipe-info">
+                    <p class="time">10 minutes</p>
+                    <h2>Chia Pudding</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/maindishes/khao_soi.html">
+            <div class="recipe-card" data-title="Khao Soi (Thai Coconut Noodle Soup)">
+                <img src="/image/healthyrecipes/main/khaosoi.jpg" alt="Khao Soi (Thai Coconut Noodle Soup)" />
+                <div class="recipe-info">
+                    <p class="time">30 minutes</p>
+                    <h2>Khao Soi (Thai Coconut Noodle Soup)</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/soups/curried_zucchini_soup.html">
+            <div class="recipe-card" data-title="Curried Zucchini Soup">
+                <img src="/image/healthyrecipes/soups/zucchinisoup.jpg" alt="Curried Zucchini Soup" />
+                <div class="recipe-info">
+                    <p class="time">30 minutes</p>
+                    <h2>Curried Zucchini Soup</h2>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                let searchTerm = $(this).val().toLowerCase();
+                if (searchTerm === '') {
+                    $('.recipe-card').parent().show();
+                } else {
+                    $('.recipe-grid a').each(function () {
+                        let title = $(this).find('.recipe-card').data('title').toLowerCase();
+                        if (title.includes(searchTerm)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+</html>

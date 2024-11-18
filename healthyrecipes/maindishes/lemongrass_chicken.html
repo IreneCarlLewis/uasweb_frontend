@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Grilled Lemongrass Chicken</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img src="/image/healthyrecipes/main/lemongrasschicken.jpg" alt="Grilled Lemongrass Chicken">
+            </div>
+            <div class="r-content">
+                <h1>Grilled Lemongrass Chicken</h1>
+                <p>This Salmon Bowl is brimming with healthy protein, healthy veggies, and savory Asian flavors. Salmon
+                    bites are paired
+                    with roasted shiitake mushrooms, edamame, avocado, and red cabbage drizzled with a delicious miso
+                    dressing. <br><br>
+                    This Miso Salmon Bowl recipe bursts with umami flavor! Tender chunks of salmon, roasted quickly in
+                    the air fryer
+                    (instructions included for oven and pan seared) alongside earthy shiitake mushrooms, edamame beans,
+                    and creamy slices of
+                    avocado. Fresh, crunchy red cabbage adds a splash of color and crispiness to the mix.
+                    <br><br>
+                    It’s all brought together with a mouth-watering miso dressing that’s got a punchy, umami flavor that
+                    takes this dish to
+                    a whole new savory level. If you’re vegan or on a gluten-free diet, you’ve got options to switch
+                    things up without
+                    missing out on flavor. A dish that’s as versatile as it is delicious!
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li>2–2 1/4 lbs chicken thighs, boneless and skinless</li>
+                    </ul>
+                    <br>
+                    <h2> Marinade</h2>
+                    <ul>
+                        <li>2 stalks lemongrass (1/2 cup chopped)</li>
+                        <li>1 medium shallot, rough chopped</li>
+                        <li>4 cloves garlic, whole</li>
+                        <li>1/4 cup olive oil</li>
+                        <li>1 tablespoon soy sauce (or GF Bragg’s Amino Acid)</li>
+                        <li>2 teaspoons salt</li>
+                        <li>2 teaspoons sugar (or alternative sweetener)</li>
+                        <li>1 teaspoon Five-Spice powder</li>
+                        <li>1–3 teaspoons Chili Garlic Sauce (optional, for heat)</li>
+                    </ul>
+                    <li>Serve with rice noodles, sliced cucumber, Nuoc Cham dressing, and fresh herbs (mint and Thai
+                        basil), sprouts,
+                        and lime wedges.</li>
+                    </ul>
+
+
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>Preheat the grill to medium-high heat.</li>
+                        <li>Make the lemongrass paste: Thinly slice the tender white parts of the lemongrass stalks and
+                            place them in the
+                            food processor. You should have roughly 1/2 cup. Add the garlic cloves and rough-chopped
+                            shallot.</li>
+                        <li>Pulse repeatedly until the lemongrass is broken down. Add oil, soy sauce, salt, sugar,
+                            Five-Spice powder, and
+                            optional chili garlic sauce. Process into a paste, scraping down the sides as needed.
+                            Process for a couple of
+                            minutes until the lemongrass is finely chopped and the mixture looks like a paste.</li>
+                        <li>Coat all sides of the chicken with the paste. You can do this ahead and refrigerate for up
+                            to 48 hours, or grill
+                            right away.</li>
+                        <li>Oil the grill well. Grill chicken over medium-high or medium heat until deep grill marks
+                            appear, about 3-4
+                            minutes. The grill marks help naturally release the chicken from the grill, so wait for
+                            them. Do not move the
+                            chicken around too much or you will lose the lemongrass flavor.</li>
+                        <li>Use a thin metal spatula to flip the chicken. Cook for 3 more minutes, check for grill
+                            marks, then lower the
+                            heat, cover with a lid, and cook all the way through. Alternatively, you can finish cooking
+                            in a 350°F oven,
+                            uncovered.</li>
+                        <li>Serve over rice noodles with cucumber, mint, Thai basil, and nuoc cham dressing, or simply
+                            over rice.</li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 1 serving</li>
+                        <li><strong>Calories:</strong> 416</li>
+                        <li><strong>Sugar:</strong> 1.8 g</li>
+                        <li><strong>Sodium:</strong> 1615.3 mg</li>
+                        <li><strong>Fat:</strong> 26.8 g</li>
+                        <li><strong>Saturated Fat:</strong> 6.7 g</li>
+                        <li><strong>Carbohydrates:</strong> 3.8 g</li>
+                        <li><strong>Fiber:</strong> 0.3 g</li>
+                        <li><strong>Protein:</strong> 25.8 g</li>
+                        <li><strong>Cholesterol:</strong> 143.6 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name}:</strong> <p>${comment}</p>`;
+
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

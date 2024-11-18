@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Thai Basil Chicken</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img src="/image/healthyrecipes/main/thaibasil.jpg" alt="Thai Basil Chicken">
+            </div>
+            <div class="r-content">
+                <h1>Thai Basil Chicken</h1>
+                <p>Fragrant Thai Basil Chicken is simple, fast and flavorful! Perfect for weeknight dinners, ready to
+                    serve in under 30
+                    minutes.
+                    <br><br>
+                    This Thai Basil Chicken stir fry is couldn’t be any easier! It’s common on most Thai restaurant
+                    menus (aka pad krapow
+                    gai) but can easily be made at home. This is the kind of food I am craving lately, tasty and
+                    satisfying but doesn’t take
+                    much effort.
+                    <br><br>
+                    Using ground chicken (or ground turkey) makes this recipe even faster. You could certainly chop up
+                    whole chicken thighs
+                    or breasts if you prefer, or use crumbled tofu. Traditionally this is made with Thai holy basil
+                    which is also known as
+                    tulsi basil, and is available fresh, at some Asian Markets. Thai basil is easier to come by and
+                    works great in this
+                    recipe. And yes, you can use regular Italian basil! TIP: When using regular basil, I like to add
+                    just a pinch of ground
+                    anise to the stir fry. If you love it spicy definitely go for the red Thai chilies! Fresno chilies
+                    have great flavor and
+                    though not as spicy as the Thai chilies, they still have a good kick!
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li>3 shallots, cut in thin slices</li>
+                        <li>5 large garlic cloves, roughly chopped</li>
+                        <li>3–6 Fresno chilies or Thai chilies (spicier!), cut into thin rings</li>
+                        <li>2 tablespoons avocado oil or peanut oil, divided</li>
+                        <li>1 pound ground chicken (or substitute ground turkey, or crumbled extra firm tofu)</li>
+                        <li>1/2 teaspoon black pepper</li>
+                        <li>1/2 teaspoon salt</li>
+                        <li>2 teaspoons coconut sugar, honey, or regular sugar</li>
+                        <li>1 tablespoon soy sauce or GF Liquid Aminos</li>
+                        <li>1 tablespoon fish sauce</li>
+                        <li>1 red bell pepper, sliced into bite-sized strips</li>
+                        <li>1 cup Thai basil leaves or Holy Basil (Tulsi), regular basil will also work</li>
+                        <li>Pinch of ground anise seeds if using regular basil (optional)</li>
+                    </ul>
+
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>If serving with rice, start that first.</li>
+                        <li>Heat up a pan or wok to medium-high heat. Add 1 tablespoon of oil and the shallots, stirring
+                            for 2 minutes.</li>
+                        <li>Add garlic and hot peppers, stirring for 2 minutes more until shallots are lightly browned
+                            on the edges. Scoop
+                            out into a bowl and set aside.</li>
+                        <li>Without cleaning out the pan, add 1 tablespoon of oil, turn the heat to high, and add ground
+                            chicken, black
+                            pepper, and salt. Stir-fry for a couple of minutes until the chicken is cooked and starting
+                            to brown.</li>
+                        <li>Sprinkle coconut sugar, soy sauce, and fish sauce over the chicken and stir until
+                            incorporated.</li>
+                        <li>Add the red bell pepper strips and the shallot mixture. Cook for about a minute, just enough
+                            to warm, keeping
+                            the peppers tender-crisp.</li>
+                        <li>Add basil leaves and turn the heat off.</li>
+                        <li>Serve over jasmine rice. Season with more soy sauce if desired.</li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 1 serving</li>
+                        <li><strong>Calories:</strong> 511</li>
+                        <li><strong>Sugar:</strong> 6.8 g</li>
+                        <li><strong>Sodium:</strong> 924.3 mg</li>
+                        <li><strong>Fat:</strong> 17.1 g</li>
+                        <li><strong>Saturated Fat:</strong> 3.6 g</li>
+                        <li><strong>Carbohydrates:</strong> 63.6 g</li>
+                        <li><strong>Fiber:</strong> 4.9 g</li>
+                        <li><strong>Protein:</strong> 31.7 g</li>
+                        <li><strong>Cholesterol:</strong> 96.3 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name}:</strong> <p>${comment}</p>`;
+
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

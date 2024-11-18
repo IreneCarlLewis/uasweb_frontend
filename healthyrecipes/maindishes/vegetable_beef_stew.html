@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Vegetable Beef Stew</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img src="/image/healthyrecipes/main/beefstew.jpg" alt="Instant Pot Vegetable Beef Stew">
+            </div>
+            <div class="r-content">
+                <h1>Instant Pot Vegetable Beef Stew</h1>
+                <p>Get warm and cozy with this Instant Pot Beef Stew with root veggies- a hearty, comforting one-pot
+                    meal that is
+                    keto-friendly, easy to make, and full of depth and flavor.
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li>1 pound beef stew meat or 1 inch cubed chuck roast</li>
+                        <li>3/4–1 teaspoon salt</li>
+                        <li>1/2–1 teaspoon cracked pepper</li>
+                        <li>1 tablespoon grapeseed oil (or other high heat oil)</li>
+                        <li>1/2 cup shallot, chopped</li>
+                        <li>2 celery stalks, chopped</li>
+                        <li>4 cloves garlic, chopped</li>
+                        <li>1–2 teaspoons olive oil</li>
+                        <li>1/2 cup red wine</li>
+                        <li>3 tablespoons balsamic vinegar</li>
+                        <li>1 1/2 teaspoons Dijon mustard</li>
+                        <li>1/2 cup whole tomatoes in juice</li>
+                        <li>1 cup beef broth</li>
+                        <li>1 tablespoon fresh thyme or 1 teaspoon dried thyme</li>
+                        <li>2 bay leaves</li>
+                        <li>1/2 teaspoon salt, adjust to taste</li>
+                        <li>1/2 teaspoon black pepper, adjust to taste</li>
+                        <li>4 cups or 1.5 pounds of combined root vegetables (3 red potatoes, 1 parsnip, 2 rutabagas, 2
+                            carrots) cut into
+                            1-2 inch chunks - see notes. Prep these while beef is pressure cooking.</li>
+                        <li>1/4 cup fresh Italian parsley, coarsely chopped</li>
+                    </ul>
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>Pat the meat chunks off with paper towels, soaking up any moisture. The less moisture, the
+                            better the sear,
+                            which will give the meat better flavor and texture. Season generously with salt and pepper.
+                        </li>
+                        <li>Set the Instant Pot to the sauté function. Add oil and sear beef chunks in two batches, then
+                            remove beef from
+                            the pot and set aside.</li>
+                        <li>Sauté shallots, celery, garlic, and olive oil (if needed) among all the leftover bits in the
+                            pot for about 2
+                            minutes.</li>
+                        <li>Add red wine, balsamic vinegar, Dijon mustard, tomatoes, beef broth, thyme, bay leaves,
+                            salt, and pepper. Mix
+                            around, scraping the bottom of the pot to get off any stuck bits. Smash up the tomatoes
+                            against the side to
+                            break them up a bit.</li>
+                        <li>Add seared beef. Cook on high pressure for 30 minutes, making sure to seal the steam valve.
+                            Prep your veggies
+                            while the beef cooks.</li>
+                        <li>Allow to naturally release for 15 minutes.</li>
+                        <li>Add the root vegetables in with the stew and set to low pressure for another 3-4 minutes,
+                            depending on your
+                            preference for doneness (see notes).</li>
+                        <li>Manually release the steam valve. Add fresh parsley and serve with sourdough biscuits!</li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 1 cup</li>
+                        <li><strong>Calories:</strong> 238</li>
+                        <li><strong>Sugar:</strong> 8.7 g</li>
+                        <li><strong>Sodium:</strong> 641.7 mg</li>
+                        <li><strong>Fat:</strong> 6.5 g</li>
+                        <li><strong>Saturated Fat:</strong> 1.8 g</li>
+                        <li><strong>Carbohydrates:</strong> 25.8 g</li>
+                        <li><strong>Fiber:</strong> 5.4 g</li>
+                        <li><strong>Protein:</strong> 20 g</li>
+                        <li><strong>Cholesterol:</strong> 49.9 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name}:</strong> <p>${comment}</p>`;
+
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

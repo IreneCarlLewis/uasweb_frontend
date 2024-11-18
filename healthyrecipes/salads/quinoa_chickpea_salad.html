@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Lemony Quinoa Chickpea Salad</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img src="/image/healthyrecipes/salads/lemonsalad.jpg" alt="Lemony Quinoa Chickpea Salad">
+            </div>
+            <div class="r-content">
+                <h1>Lemony Quinoa Chickpea Salad</h1>
+                <p>This Quinoa Chickpea Salad recipe is bursting with Mediterranean flavors – fresh light and lemony,
+                    packed full of
+                    nutrients; you’ll want to serve this up all summer long! Healthy, vegan and great for meal prep.
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <h2>Preserved Lemon Dressing</h2>
+                    <ul>
+                        <li>1/4 cup preserved lemons, finely chopped (or see notes)</li>
+                        <li>1/4 cup olive oil</li>
+                        <li>1/4 cup lemon juice</li>
+                        <li>2 garlic cloves, finely minced</li>
+                        <li>1/2 teaspoon salt</li>
+                        <li>1/2 teaspoon pepper</li>
+                        <li>1/2 teaspoon sumac (optional)</li>
+                    </ul>
+                    <br>
+                    <h2>Chickpea Quinoa Salad</h2>
+                    <ul>
+                        <li>3/4 cup quinoa (dry, uncooked)</li>
+                        <li>1 1/2 cups water</li>
+                        <li>1 15-ounce can chickpeas, rinsed and drained (1 1/2 cups cooked chickpeas)</li>
+                        <li>1/2 cup red onion, finely chopped (see notes)</li>
+                        <li>1 English cucumber, diced (2 cups)</li>
+                        <li>1 bell pepper (yellow is nice), diced</li>
+                        <li>1 cup cherry or grape tomatoes, halved (or chopped radish)</li>
+                        <li>1/4 cup kalamata olives, chopped or halved</li>
+                        <li>1/2 cup flat-leaf parsley, chopped</li>
+                        <li>1/4 cup dill, chopped (or sub mint, or use both!)</li>
+                        <li>Optional additions: avocado, feta, radishes</li>
+                    </ul>
+
+
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>Place quinoa, water, and a pinch of salt in a medium pot. Bring to a boil, cover, and simmer
+                            on low for 12-15
+                            minutes until all the water is gone. Uncover, fluff, and cool slightly.</li>
+                        <li>Make the dressing by mixing all the ingredients in a bowl.</li>
+                        <li>Prep all the veggies. If sensitive to onions, dice them and soak in cold salted water while
+                            you chop the rest.
+                        </li>
+                        <li>Place the chickpeas, onions, cucumber, bell pepper, tomatoes, olives, dill, and parsley in a
+                            large bowl. Add the
+                            quinoa and dressing and toss well.</li>
+                        <li>Taste and adjust salt and lemon to your liking. If making ahead, taste again before serving
+                            as the quinoa and
+                            chickpeas may soak up the salt and lemon.</li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 1 cup</li>
+                        <li><strong>Calories:</strong> 253</li>
+                        <li><strong>Sugar:</strong> 3.4 g</li>
+                        <li><strong>Sodium:</strong> 607.4 mg</li>
+                        <li><strong>Fat:</strong> 12.8 g</li>
+                        <li><strong>Saturated Fat:</strong> 1.7 g</li>
+                        <li><strong>Carbohydrates:</strong> 30.3 g</li>
+                        <li><strong>Fiber:</strong> 6.1 g</li>
+                        <li><strong>Protein:</strong> 7.5 g</li>
+                        <li><strong>Cholesterol:</strong> 0 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name} says:</strong> <p>${comment}</p>`;
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

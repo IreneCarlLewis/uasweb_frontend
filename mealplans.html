@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css" />
+    <title>Meal Plans</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="image-container">
+        <img src="image/mealplans/mealplans.jpg" />
+        <div class="centered-text">
+            <div class="large-text"> Meal of The Day </div>
+            <div class="small-text"> Plan your meals! </div>
+        </div>
+    </div>
+
+    <div class="recipe-grid">
+        <a href="mealplans/weightloss.html">
+
+            <div class="recipe-card">
+                <img src="image/mealplans/diet.jpg" />
+                <div class="recipe-info">
+
+                    <h2> Weight Loss</h2>
+
+                </div>
+            </div>
+
+        </a>
+
+        <a href="mealplans/highprotein.html">
+            <div class="recipe-card">
+                <img src="image/mealplans/proteinhigh.jpg" />
+                <div class="recipe-info">
+
+                    <h2> High Protein </h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="mealplans/lowcarbo.html">
+            <div class="recipe-card">
+                <img src="image/mealplans/lowcarbo.jpg" />
+                <div class="recipe-info">
+
+                    <h2> Low Carbo </h2>
+
+                </div>
+            </div>
+        </a>
+
+        <a href="mealplans/lowcholestrol.html">
+            <div class="recipe-card">
+                <img src="image/mealplans/lowcholestrol.jpg" />
+                <div class="recipe-info">
+                    <h2>
+                        Low Cholestrol
+                    </h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="mealplans/lowss.html">
+            <div class="recipe-card">
+                <img src="image/mealplans/sugarsalt.png" />
+                <div class="recipe-info">
+                    <h2>
+                        Low Salt & Sugar
+                    </h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="mealplans/antiinflammatory.html">
+            <div class="recipe-card">
+                <img src="image/mealplans/antinflammatory.jpg" />
+                <div class="recipe-info">
+                    <h2>
+                        Anti Inflammatory
+                    </h2>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+</body>
+
+</html>

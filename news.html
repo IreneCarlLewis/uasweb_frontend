@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css" />
+    <title>News</title>
+</head>
+<style>
+    .centered-text {
+        width: 80%;
+        max-width: 1600px;
+    }
+</style>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="image-container">
+        <img src="/image/news/news.jpg" alt="Image" />
+        <div class="centered-text">
+            <div class="large-text">News</div>
+            <div class="small-text">"Stay Updated on the Latest in Food & Nutrition!"
+            </div>
+        </div>
+    </div>
+    <div class="recipe-grid">
+        <div class="recipe-card">
+            <a href="/news/studies_experts/studies_experts.html">
+                <img src="/image/news/studies/studies&experts.jpg" alt="studies_experts" />
+                <div class="recipe-info">
+                    <h2>Studies & Experts</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="recipe-card">
+            <a href="/news/grocery_foodnews/grocery_foodnews.html">
+                <img src="/image/news/grocery/Grocery & Food News.jpg" alt="grocery_foodnews" />
+                <div class="recipe-info">
+                    <h2>Grocery & Food News</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="recipe-card">
+            <a href="/news/celebrities_entertaiment/celebrities_entertainment.html">
+                <img src="/image/news/celebrities/Celebrities & Entertainment.jpg" alt="celebrities_entertainment" />
+                <div class="recipe-info">
+                    <h2>Celebrities & Entertainment</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="recipe-card">
+            <a href="/news/recalls/recalls.html">
+                <img src="/image/news/recalls/Recalls.jpg" alt="recalls" />
+                <div class="recipe-info">
+                    <h2>Recalls</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    //footer
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+<div id="footer-placeholder"></div>
+</body>
+
+</html>

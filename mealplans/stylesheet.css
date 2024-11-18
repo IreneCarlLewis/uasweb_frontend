@@ -1,0 +1,94 @@
+.meal-days-slider {
+    display: flex;
+    overflow: hidden;
+    /* harus ada supaya bisa slide*/
+    width: 100%;
+    /* supaya bisa full screen lebarnya*/
+    user-select: none;
+    /*supaya ketika di slide itu, konten lain tidak ke block*/
+
+}
+
+.meals-menu-inner-container {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.daily-item-container {
+    padding: 20px;
+    background-color: #1b5e20;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .meals-menu-outer-container {
+        width: 90%;
+    }
+
+    .daily-item-container {
+        padding: 10px;
+    }
+
+    .dropdown-content {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .meals-menu-outer-container {
+        width: 95%;
+    }
+
+    .daily-item-container {
+        padding: 8px;
+    }
+
+    .dropdown-content {
+        padding: 5px;
+    }
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #1b5e20;
+    color: #000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 60%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.content h1 {
+    margin-bottom: 10px;
+}
+
+.content p {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.content h2 {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    cursor: pointer;
+    color: #f2f2f2;
+}
+
+.content h2:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}

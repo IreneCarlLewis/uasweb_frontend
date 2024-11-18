@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Playfair Display", serif;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 50px;
+    text-align: center;
+}
+
+.banner {
+    background-color: #4d774e;
+    height: 20px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    color: #4d774e;
+    padding: 20px;
+}
+
+.navbar a {
+    margin: 10px;
+    font-size: 20px;
+    color: #4d774e;
+    text-decoration: none;
+}
+
+.navbar {
+    background-color: #f2f2f2;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.navbar a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.dropdown {
+    position: relative;
+    /* biar navbarnya yg punya dropdown jadi gak berantakan*/
+    display: inline-block;
+    /* biar navbarnya tidak tersusun kebawah alias tersusun deret ke samping*/
+}
+
+.select {
+    font-size: 20px;
+    color: #4d774e;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    /* biar ketika ada dropdown, navbar yg lain tidak berantakan */
+    display: none;
+    /* biar gada dropdown yang ditampilkan ketika kursor tidak diarahkan ke navbar*/
+    text-align: left;
+    /* biar isi di menu dropdown itu teksnya rata kiri semua */
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    /* memastikan dropdown menu berada di layer palong depan dan tidak tertimpa komponen lain*/
+    border-radius: 4px;
+}
+
+.dropdown-item {
+    display: block;
+    /* biar isi dropdown menunya tidak berantakan*/
+    width: 100%;
+    padding: 10px;
+    white-space: nowrap;
+    /* biar isinya tidak overflow atau tidak melebihi batas border dropdownnya */
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+.login-reg {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+}
+
+.login-reg a {
+    font-size: 15px;
+    color: #4d774e;
+    text-decoration: none;
+}
+
+.login-reg a i {
+    margin-right: 8px;
+}
+
+.navdown {
+    font-size: 30px;
+    background-color: #f2f2f2;
+    color: #4d774e;
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Icon width */
+    cursor: pointer;
+}
+
+.navdown {
+    font-size: 30px;
+    color: #4d774e;
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Icon width */
+}
+
+.navdropdown {
+    position: absolute;
+    display: none;
+    text-align: left;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 10px;
+}
+
+.navdown-item {
+    display: block;
+    width: inherit;
+    padding: 15px;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #4d774e;
+}
+
+.navdown-item:hover {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 980px) {
+
+    .dropdown,
+    .navbar a {
+        display: none;
+    }
+
+    .navdown {
+        display: block;
+    }
+
+    .navdown:hover+.navdropdown,
+    .navdropdown:hover {
+        display: block;
+    }
+
+    .navbar .login-reg {
+        display: none;
+        margin-left: 10px;
+    }
+}
+
+/* css footer*/
+footer {
+    background-color: #4d774e;
+    color: #ecf0f1; 
+    padding: 20px 10px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  .footer-container > div {
+    flex-basis: 22%; 
+    margin-bottom: 20px;
+  }
+  
+  /* gaya untuk bagian About */
+  .footer-about h1 {
+    color: white; 
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-about p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: white;
+  }
+  
+  /* gaya untuk Links */
+  .footer-links ul li{
+    list-style: none;
+  }
+  
+  .footer-links h3, .footer-social h3, .footer-contact h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #ecf0f1;
+  }
+  
+  .footer-links a, .footer-bottom a {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .footer-links a:hover, .footer-bottom a:hover {
+    color: #e74c3c; 
+  }
+  
+  /* Gaya untuk Social Media */
+  .footer-social a {
+    margin-right: 15px;
+  }
+  
+  .footer-social a {
+    color: #ecf0f1; /* warna untuk ikon */
+    margin-right: 15px;
+    font-size: 24px; /* ukuran ikon */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .footer-social a:hover {
+    color: #e74c3c; 
+    transform: scale(1.2);
+  }
+  
+  /* Gaya untuk bagian contact */
+  .footer-contact p {
+    font-size: 16px;
+    color:#ecf0f1;
+  }
+  
+  .footer-contact a {
+    color: #ecf0f1;
+    text-decoration: none; 
+  }
+  
+  .footer-contact a:hover {
+    color: #e74c3c; 
+  }
+  
+  .footer-contact i {
+    margin-right: 8px; /*jarak antara ikon dan teks*/
+    font-size: 18px; /*ukuran ikon*/
+  }
+
+  
+  /* Gaya untuk bagian bawah */
+  .footer-bottom {
+    padding-top: 15px 0;
+    text-align: center;
+    font-size: 13px;
+  }
+  
+  .footer-bottom p {
+    line-height:1.5;
+    margin:0;
+    color: white;
+  }
+  
+
+  /* media Queries untuk layar tablet*/
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer-container > div {
+      flex-basis: 100%; /* Full width untuk setiap bagian di layar tablet*/
+      margin-bottom: 20px;
+    }
+  
+    .footer-social a {
+      font-size: 20px; /* Sesuaikan ukuran ikon di layar tabet */
+    }
+  
+    .footer-about h2 {
+      font-size: 30px; /* Sesuaikan ukuran judul di layar tablet*/
+    }
+  }
+  
+  /* Media Queries untuk Layar Ponsel */
+  @media (max-width: 480px) {
+    .footer-about h2 {
+      font-size: 25px;
+    }
+  
+    .footer-about p, .footer-contact p {
+      font-size: 12px;
+    }
+  
+    .footer-links a {
+      font-size: 14px;
+    }
+  
+    .footer-social a {
+      font-size: 18px; /* Ukuran ikon lebih kecil di ponsel */
+    }
+  
+    .footer-bottom {
+      font-size: 12px;
+    }
+  }
+  

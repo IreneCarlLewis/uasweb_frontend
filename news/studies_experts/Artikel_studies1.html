@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Gluten-Free Diet: Necessary for Everyone?</title>
+    <link rel="stylesheet" href="/stylesheet.css" />
+</head>
+<style>
+    p{
+        color:black;
+        font-size: 20px;
+    }
+    div.news-content h2{
+        color:black;
+        font-size: 40px;
+    }
+    div.news-content ul li{
+        font-size: 20px;
+    }
+</style>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-card-artikel">
+        <h2> Studies & Experts</h2>
+    </div>
+    <div class = "news-content">
+        <div class="artikel-title">
+            <h1> Gluten-Free Diet: Necessary for Everyone? </h1>
+        </div>
+        <div class="artikel-container">
+            <p>In recent years, the gluten-free diet has become increasingly popular. Many people are cutting gluten out of their diet, believing it to be a healthier choice. But is a gluten-free diet necessary for everyone, or just for specific individuals? Let’s take a closer look at what gluten is, who needs to avoid it, and whether it's beneficial for those without gluten-related disorders.</p><br>
+
+            <h2>What is Gluten?</h2>
+            <p>Gluten is a type of protein found in grains such as wheat, barley, and rye. It plays an important role in baking, giving bread its chewy texture and helping dough maintain its shape. For most people, gluten poses no issues. However, for some, it can cause significant health problems.</p> <br>
+            
+            <h2>Who Needs a Gluten-Free Diet?</h2>
+            <p>A gluten-free diet is essential for individuals with certain medical conditions. These include:</p><br>
+            <ul>
+                <li> <strong>Celiac Disease: </strong>An autoimmune disorder where the ingestion of gluten triggers an immune response that damages the small intestine. This can lead to a range of symptoms including diarrhea, bloating, fatigue, and nutrient deficiencies. For people with celiac disease, a strict gluten-free diet is critical for managing their health.</li>
+                <li> <strong>Non-Celiac Gluten Sensitivity: </strong>Some people without celiac disease experience similar symptoms after consuming gluten, such as bloating, headaches, and fatigue. This condition is known as non-celiac gluten sensitivity (NCGS). Although the immune system is not involved, avoiding gluten can help alleviate symptoms for these individuals.</li>
+                <li> <strong>Wheat Allergy: </strong>Some people have an allergic reaction to wheat, which contains gluten. While wheat allergy is different from celiac disease and gluten sensitivity, individuals with this allergy may also need to avoid foods containing wheat.</li>
+            </ul><br>
+
+            <h2>Is Gluten-Free Healthy for Everyone?</h2>
+            <p> For individuals without gluten-related conditions, a gluten-free diet is not necessarily healthier. In fact, it can sometimes lead to nutritional deficiencies. Many gluten-containing foods, such as whole grains, are rich in fiber, vitamins, and minerals. When these foods are removed from the diet, they are often replaced with processed gluten-free alternatives that can be lower in nutrients and higher in sugar or fat.<br><br>
+                Additionally, gluten-free products can be more expensive, and for those who do not need to avoid gluten for medical reasons, following this diet may offer no real benefit. 
+            </p><br>
+            <h2>How to Safely Follow a Gluten-Free Diet</h2>
+            <p>If you need to follow a gluten-free diet, it’s important to do so in a way that maintains a balanced intake of nutrients. Here are some tips:</p><br>
+            <ul>
+                <li><strong>Focus on Naturally Gluten-Free Foods: </strong> Instead of relying on processed gluten-free products, focus on whole foods that are naturally gluten-free. These include fruits, vegetables, lean proteins, and gluten-free grains such as quinoa, rice, and corn.</li>
+                <li><strong>Ensure Nutritional Balance: </strong> Make sure your diet includes enough fiber, iron, calcium, and B vitamins. You can get these from a variety of gluten-free whole foods like leafy greens, legumes, seeds, and fortified gluten-free products.</li>
+                <li><strong>Consult a Dietitian: </strong> If you are unsure how to manage a gluten-free diet, especially if it’s for medical reasons, consulting a dietitian can help ensure you're meeting all your nutritional needs while avoiding gluten.</li>
+            </ul><br>
+            
+            <h2>Conclusion</h2>
+            <p>For those with celiac disease, non-celiac gluten sensitivity, or a wheat allergy, a gluten-free diet is essential. However, for individuals without these conditions, there is no need to avoid gluten, and doing so may even lead to nutritional deficiencies if not managed properly. Before making significant dietary changes, it's important to consult with a healthcare professional to ensure you're making the best decision for your health.</p><br>
+        </div>
+    </div>
+    <div id="navbar-placeholder"></div>
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    //footer
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+<div id="footer-placeholder"></div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css" />
+    <title>Special Diets</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="image-container">
+        <img src="/image/specialdiets/specialdiets.jpg" alt="Image" />
+        <div class="centered-text">
+            <div class="large-text">Special Diets</div>
+            <div class="small-text">We're here to help you choose foods that will help you feel your best.</div>
+        </div>
+    </div>
+    <div class="recipe-grid">
+        <a href="/specialdiets/keto/keto_page.html">
+            <div class=" recipe-card">
+                <img src="/image/specialdiets/keto.jpg" />
+                <div class="recipe-info">
+                    <p class="time">Low-carb, high fat diet</p>
+                    <h2>Keto</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/specialdiets/glutenfree/gf_page.html">
+            <div class=" recipe-card">
+                <img src="/image/specialdiets/glutenfree.jpg" />
+                <div class="recipe-info">
+                    <p class="time">No gluten, healthy grains</p>
+                    <h2>Gluten-Free</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/specialdiets/vegan/vegan_page.html">
+            <div class=" recipe-card">
+                <img src="/image/specialdiets/vegan.jpg" />
+                <div class="recipe-info">
+                    <p class="time">Plant-based, no animal products</p>
+                    <h2>Vegan</h2>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+</html>

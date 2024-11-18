@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Pavlova</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img id="recipe-image" src="/image/healthyrecipes/desserts/pavlova.jpg" alt="Pavlova">
+                <div class="image-controls">
+                    <button class="control-btn" onclick="prevImage()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="control-btn" onclick="nextImage()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="r-content">
+                <h1>Pavlova</h1>
+                <p>Making a Pavlova is fun and easy. Top with fresh berries and lofty whipped cream. A light and airy
+                    dessert perfect for
+                    celebrations and gatherings.
+                    <br><br>
+                    Pavlova is a light and airy dessert, hailing from Australia and New Zealand made of whipped egg
+                    whites, that are
+                    slow-baked in the oven until crisp. Typically topped with whipped cream and fruit, it’s a stunning
+                    dessert, that looks
+                    fancy, but couldn’t be easier!
+                    <br><br>
+                    This Pavlova recipe is topped with various fresh seasonal berries and whipped cream. So delicious!
+                    Keep it simple or
+                    enhance your whipped cream with a dollop of jam or lemon curd. There is something so satisfying
+                    about whipping egg
+                    whites into fluffy white clouds. If you’ve never tried it, we promise you will love it.
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <h2>Pavlova</h2>
+                    <ul>
+                        <li>4 large eggs (at room temperature)</li>
+                        <li>Pinch of salt</li>
+                        <li>1 cup fine sugar (see notes)</li>
+                        <li>1 teaspoon cream of tartar (or 1 teaspoon vinegar – see notes)</li>
+                        <li>1 teaspoon vanilla extract (optional)</li>
+                    </ul>
+                    <br>
+                    <h2>Whipped Cream</h2>
+                    <ul>
+                        <li>1 cup heavy whipping cream</li>
+                        <li>1 tablespoon sugar (adjust to your preferred sweetness)</li>
+                        <li>Lemon zest or Meyer lemon zest (optional)</li>
+                        <li>1 tablespoon berry jam (or lemon curd)</li>
+                    </ul>
+                    <br>
+                    <h2>Berry Topping</h2>
+                    <ul>
+                        <li>1 pint fresh berries (blackberries, blueberries, strawberries, currants, or a mix)</li>
+                    </ul>
+
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>Preheat the oven to 350°F (175°C). Draw an 8-9″ circle on a piece of parchment paper and
+                            place it on a baking
+                            sheet. Flip the parchment so the writing is on the underside.</li>
+                        <li>Separate the eggs. Cold eggs separate better, but room-temperature egg whites whip better.
+                            Separate the eggs
+                            while cold, then let the whites come to room temperature. To speed this up, place the bowl
+                            of whites over a bowl
+                            of warm water.</li>
+                        <li>In a stand mixer, whip the egg whites on medium until foamy. Add cream of tartar. If using
+                            vinegar instead, add
+                            it later with the vanilla.</li>
+                        <li>Gradually add sugar one tablespoon at a time, whisking between each addition until the sugar
+                            is fully
+                            incorporated. Increase the mixer speed and beat until the whites are glossy and stiff.</li>
+                        <li>Test the mixture by rubbing between your fingers; there should be no sugar granules. If it's
+                            still gritty,
+                            continue beating.</li>
+                        <li>Once the peaks are stiff, add the pinch of salt and vanilla (if using) and whip for another
+                            30 seconds.</li>
+                        <li>Shape the Pavlova: Gently scoop the mixture onto the parchment. Spread it in a circle with a
+                            cake knife,
+                            creating a slight indent in the center with raised edges.</li>
+                        <li>Bake: Place the tray in the oven, then reduce the temperature to 200°F (95°C). Bake for 120
+                            minutes or until the
+                            Pavlova is dry to the touch. Turn off the oven and allow it to cool inside for at least 2
+                            hours or overnight.
+                        </li>
+                        <li>For the whipped cream: Whip together the cream, sugar, and zest to medium-soft peaks. Fold
+                            in a tablespoon of
+                            jam or lemon curd if desired.</li>
+                        <li>Assemble: Just before serving, top the cooled Pavlova with whipped cream and fresh berries.
+                            Serve immediately!
+                        </li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 1 piece</li>
+                        <li><strong>Calories:</strong> 120</li>
+                        <li><strong>Sugar:</strong> 25.6 g</li>
+                        <li><strong>Sodium:</strong> 26.5 mg</li>
+                        <li><strong>Fat:</strong> 4.5 g</li>
+                        <li><strong>Saturated Fat:</strong> 2.8 g</li>
+                        <li><strong>Carbohydrates:</strong> 27.6 g</li>
+                        <li><strong>Fiber:</strong> 0.7 g</li>
+                        <li><strong>Protein:</strong> 2 g</li>
+                        <li><strong>Cholesterol:</strong> 13.6 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        let currentImageIndex = 0;
+
+        const images = [
+            "/image/healthyrecipes/desserts/pavlova.jpg",
+            "/image/healthyrecipes/desserts/pavlova2.jpg"
+        ];
+
+        function showImage(index) {
+            const imgElement = document.getElementById('recipe-image');
+            imgElement.src = images[index];
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
+            showImage(currentImageIndex);
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
+            showImage(currentImageIndex);
+        }
+
+        function updateImage() {
+            showImage(currentImageIndex);
+        }
+
+        showImage(currentImageIndex);
+
+        // Ganti image tiap 3 detik
+        setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % images.length; // Ganti ke image selanjutnya
+            updateImage();
+        }, 3000);
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name} says:</strong> <p>${comment}</p>`;
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

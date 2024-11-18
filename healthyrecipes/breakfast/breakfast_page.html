@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Healthy Recipes</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="image-container">
+        <img src="/image/healthyrecipes/breakfast/breakfast.jpg" alt="Breakfast" />
+        <div class="centered-text">
+            <div class="large-text">Breakfast</div>
+            <div class="small-text">Enjoy these amazing recipes!</div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search Recipes">
+    </div>
+
+    <div class="recipe-grid">
+        <a href="/healthyrecipes/breakfast/chia_pudding.html">
+            <div class="recipe-card" data-title="Chia Pudding">
+                <img src="/image/healthyrecipes/breakfast/chiapudding.jpg" alt="Chia Pudding" />
+                <div class="recipe-info">
+                    <p class="time">10 minutes</p>
+                    <h2>Chia Pudding</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/breakfast/vegetable_frittata.html">
+            <div class="recipe-card" data-title="Vegetable Frittata">
+                <img src="/image/healthyrecipes/breakfast/vegetablefrittata.jpg" alt="Vegetable Frittata" />
+                <div class="recipe-info">
+                    <p class="time">1 hour 35 minutes</p>
+                    <h2>Vegetable Frittata</h2>
+                </div>
+            </div>
+        </a>
+
+        <a href="/healthyrecipes/breakfast/hazelnut_french_toast.html">
+            <div class="recipe-card" data-title="Baked French Toast with Caramelized Pears and Hazelnuts">
+                <img src="/image/healthyrecipes/breakfast/frenchtoast.jpg"
+                    alt="Baked French Toast with Caramelized Pears and Hazelnuts" />
+                <div class="recipe-info">
+                    <p class="time">1 hour 5 minutes</p>
+                    <h2>Baked French Toast with Caramelized Pears and Hazelnuts</h2>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                let searchTerm = $(this).val().toLowerCase();
+                if (searchTerm === '') {
+                    $('.recipe-card').parent().show();
+                } else {
+                    $('.recipe-grid a').each(function () {
+                        let title = $(this).find('.recipe-card').data('title').toLowerCase();
+                        if (title.includes(searchTerm)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+            });
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+</html>

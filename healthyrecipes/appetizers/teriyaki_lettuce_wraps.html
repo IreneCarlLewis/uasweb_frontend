@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/healthyrecipes/stylesheet.css" />
+    <title>Teriyaki Mushroom Lettuce Wraps</title>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="recipe-outer-container">
+        <div class="recipe-inner-container">
+            <div class="recipe-item-container">
+                <img src="/image/healthyrecipes/appetizers/lettucewraps.jpg" alt="Teriyaki Mushroom Lettuce Wraps">
+            </div>
+            <div class="r-content">
+                <h1>Teriyaki Mushroom Lettuce Wraps</h1>
+                <p> These delicious Vegan Lettuce Wraps are filled with Teriyaki Mushrooms and brown rice- an easy
+                    Asian-inspired lunch
+                    recipe (or appetizer) that is healthy, vegan and satisfying! Gluten-free.
+                    <br><br>
+                    Say hello to Teriyaki Mushroom Lettuce Wraps! Not only are these vegan lettuce wraps deliciously
+                    satisfying in the
+                    flavor department- they are super light and nutritious. One of my favorite lunches right now, this
+                    recipe was created by
+                    Tonia as a way to try out that beautiful homemade Teriyaki Sauce from a couple of days ago.
+                </p>
+
+                <br>
+                <h2 id="Ingredients">Ingredients ⇩</h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li>3 tablespoons oil (avocado, peanut, or wok oil)</li>
+                        <li>2 cups (5 oz) shiitake mushrooms, cut into 1/2 inch chunks (or slices)</li>
+                        <li>2 cups (5 oz) cremini mushrooms, cut into 1/2 inch chunks (or slices)</li>
+                        <li>1 tablespoon (3 cloves) garlic, minced</li>
+                        <li>1 tablespoon ginger, minced</li>
+                        <li>1 large red, yellow, or green bell pepper, cut into 1/2 inch dice (2 cups)</li>
+                        <li>1/4 teaspoon salt</li>
+                        <li>2 scallions, chopped</li>
+                        <li>1/4 cup homemade Teriyaki Sauce</li>
+                        <li>1/2 cup cilantro, coarsely chopped</li>
+                        <li>1 head of butter lettuce</li>
+                        <li>2 cups cooked rice or grain (optional)</li>
+                        <li><strong>Garnishes:</strong> toasted sesame seeds, furikake, or chili flakes</li>
+                    </ul>
+
+                </div>
+
+                <br>
+                <h2 id="instructions"> Instructions ⇩</h2>
+                <div class="recipe-content">
+                    <ol>
+                        <li>In a large skillet, heat oil over medium-high heat and sauté mushrooms for 7-8 minutes,
+                            until tender and golden.
+                            Remove the mushroom mixture from the pan and set aside.</li>
+                        <li>Add bell peppers, garlic, and ginger to the same pan and cook for about 2 minutes on
+                            medium-high heat, adding a
+                            bit more oil if needed.</li>
+                        <li>Add the mushrooms back into the pan along with salt, scallions, and ¼ cup of teriyaki sauce.
+                            Stir to combine.
+                            Remove from heat and allow to cool for 10 minutes. Stir in cilantro.</li>
+                        <li>Place lettuce cups on a plate or platter and fill with 2-3 tablespoons of cooked rice or
+                            grain (optional). Spoon
+                            the Teriyaki Mushrooms over the top.</li>
+                        <li>Top with toasted sesame seeds, furikake, or more warmed teriyaki sauce in a bowl to spoon
+                            over top.</li>
+                    </ol>
+                </div>
+                <br>
+                <h2 id="nutritions"> Nutrition Facts ⇩ </h2>
+                <div class="recipe-content">
+                    <ul>
+                        <li><strong>Serving Size:</strong> 3 wraps</li>
+                        <li><strong>Calories:</strong> 185</li>
+                        <li><strong>Sugar:</strong> 9.5 g</li>
+                        <li><strong>Sodium:</strong> 634.2 mg</li>
+                        <li><strong>Fat:</strong> 11.6 g</li>
+                        <li><strong>Saturated Fat:</strong> 1.6 g</li>
+                        <li><strong>Carbohydrates:</strong> 18 g</li>
+                        <li><strong>Fiber:</strong> 6.6 g</li>
+                        <li><strong>Protein:</strong> 6.1 g</li>
+                        <li><strong>Cholesterol:</strong> 0 mg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div id="comments-section">
+            <h2>COMMENTS</h2>
+            <div id="comments-container"></div>
+            <!-- Form untuk comment -->
+            <form id="comment-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Write your comment" required></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        fetch('/navbar/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/healthyrecipes/comments.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('comment-placeholder').innerHTML = data;
+
+                // Attach event listener after loading the comment section
+                document.getElementById('comment-form').addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const name = document.getElementById('name').value;
+                    const comment = document.getElementById('comment').value;
+
+                    const commentElement = document.createElement('div');
+                    commentElement.classList.add('comment');
+                    commentElement.innerHTML = `<strong>${name}:</strong> <p>${comment}</p>`;
+
+                    const commentsContainer = document.getElementById('comments-container');
+                    commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+                    document.getElementById('name').value = '';
+                    document.getElementById('comment').value = '';
+                });
+            })
+            .catch(error => console.error('Error loading comment section:', error));
+
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mengambil nama dan isi comment
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Menambahkan comment
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<strong>${name} says:</strong> <p>${comment}</p>`;
+            //Comment baru akan muncul paling atas
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+
+            // Hapus form ketika sudah disubmit
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        fetch('/navbar/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div id="footer-placeholder"></div>
+
+
+</body>
+
+
+</html>

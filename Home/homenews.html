@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>home news</title>
+
+    <style>
+        .home-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .main-news {
+            flex: 2;
+            margin-right: 20px;
+            color: #4d774e;
+        }
+
+        .main-news h2:hover {
+            text-decoration: underline;
+        }
+
+        .main-news a {
+            text-decoration: none;
+            color: #4d774e;
+        }
+
+        .main-news img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .side-news {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            color: #4d774e;
+        }
+        
+        .side-news h3:hover {
+            text-decoration: underline;
+        }
+
+        .side-news a {
+            text-decoration: none;
+            color: #4d774e;
+        }
+
+        .side-news-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .side-news-item h3 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!--news-->
+    <div class="home-container">
+        <!-- Berita utama -->
+        <div class="main-news">
+            <a href="/news/studies_experts/Artikel_studies1.html" target="_parent">
+                <img src="/image/news/studies/studies&experts.jpg" alt="Hot News Image">
+                <h2>Breaking: The Truth About Gluten-Free Diets</h2>
+                <p>New studies reveal that a gluten-free diet is not necessary for everyone. Find out who really needs it and how it affects your health.</p>
+            </a>
+        </div>
+        
+        <!-- Berita tambahan -->
+        <div class="side-news">
+            <div class="side-news-item">
+                <a href="/news/studies_experts/Artikel_studies3.html" target="_parent">
+                    <img src="/image/mealplans/vegetableheader.jpg" alt="News Image 1">
+                    <h3>Vegan Diet: A Comprehensive Guide</h3>
+                    <p>Explore how a vegan diet can benefit your health, and discover the right way to get essential nutrients.</p>
+                </a>
+            </div>
+            <div class="side-news-item">
+                <a href="/news/recalls/Artikel_recalls1.html" target="_parent">
+                    <img src="/image/news/recalls/Recalls.jpg" alt="News Image 2">
+                    <h3>Latest Recalls: Stay Informed</h3>
+                    <p>Check the most recent product recalls that could impact your diet, from gluten-free to keto-friendly items.</p>
+                </a>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</body>
