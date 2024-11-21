@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .category-section {
+            text-align: center;
+            background-color: bisque;
+        }
+
+        .category-section h2 {
+            padding-top: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: #65141d;
+        }
+
+        .category-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .category-item {
+            text-align: center;
+        }
+
+        .category-item img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .category-container a {
+            text-decoration: none;
+            color: #65141d;
+        }
+
+        a:hover .category-item img {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        a:hover .category-item p {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="category-section">
+        <h2>Categories</h2>
+        <div class="category-container">
+            <a href="/products/tops.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Tops">
+                    <p>Tops</p>
+                </div>
+            </a>
+            <a href="/products/skirts.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Skirts">
+                    <p>Skirts</p>
+                </div>
+            </a>
+            <a href="/products/shorts.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Shorts">
+                    <p>Shorts</p>
+                </div>
+            </a>
+            <a href="/products/pants.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Pants">
+                    <p>Pants</p>
+                </div>
+            </a>
+            <a href="/products/outerwears.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Outerwears">
+                    <p>Outerwears</p>
+                </div>
+            </a>
+            <a href="/products/overalls.html">
+                <div class="category-item">
+                    <img src="/images/tsu.jpg" alt="Overalls">
+                    <p>Overalls</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+</body>
+
+</html>

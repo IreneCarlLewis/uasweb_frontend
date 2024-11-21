@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Register</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Cormorant Garamond', serif;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9;
+    }
+
+    .log-reg-section {
+        display: flex;
+        width: 80%;
+        max-width: 1000px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .log-reg-color {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #65141d;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .log-reg-color h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .log-reg-image {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .center {
+        flex: 1;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        order: -1;
+    }
+
+    .register-container {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .register-container h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #65141d;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        outline: none;
+        border-color: #65141d;
+        box-shadow: 0 0 5px rgba(101, 20, 29, 0.5);
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #65141d;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-family: 'Cormorant Garamond', serif;
+    }
+
+    button:hover {
+        background-color: #c8a165;
+    }
+
+    .social-log-reg {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .social-btn {
+        text-decoration: none;
+        padding: 10px;
+        font-size: 14px;
+        color: #fff;
+        border-radius: 5px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .facebook-btn {
+        background-color: #4267b2;
+    }
+
+    .facebook-btn:hover {
+        background-color: #365899;
+    }
+
+    .google-btn {
+        background-color: #db4437;
+    }
+
+    .google-btn:hover {
+        background-color: #c23321;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .login-link a {
+        text-decoration: none;
+        color: #65141d;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+        color: #c8a165;
+    }
+
+    /* Fade-in and Fade-out animations */
+    .fade-out {
+        animation: fadeOut 0.5s forwards;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s forwards;
+    }
+
+    /* Animation keyframes */
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+
+<body>
+    <div class="log-reg-section">
+        <div class="log-reg-color">
+            <img src="/images/tsukasa.jpg" alt="Food Image" class="log-reg-image">
+        </div>
+        <div class="center">
+            <div class="register-container">
+                <h1>Register</h1>
+                <form action="login.html" method="GET">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Register</button>
+                </form>
+
+                <div class="social-log-reg">
+                    <a href="login.html" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i> Register with Facebook
+                    </a>
+                    <a href="login.html" class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Register with Google
+                    </a>
+                </div>
+
+                <div class="login-link">
+                    <p>Already have an account? <a href="login.html">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

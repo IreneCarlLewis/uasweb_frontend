@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomefiore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .navbar {
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .navbar-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #65141d;
+            color: #f9f9f9;
+        }
+
+        .social-icons a {
+            margin: 0 8px;
+            text-decoration: none;
+            color: #f9f9f9 !important;
+            font-size: 20px;
+        }
+
+        .social-icons a:hover {
+            color: #000;
+        }
+
+        .account {
+            text-decoration: none;
+            color: #f9f9f9;
+            font-size: 20px;
+        }
+
+        .navbar-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #eddbbf;
+        }
+
+        .logo {
+            font-size: 50px;
+            font-weight: 500;
+            color: #65141d;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .icons a {
+            text-decoration: none;
+            font-size: 20px;
+            color: #65141d;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c8a165;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            padding: 2px 5px;
+        }
+
+        .search-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .search-container input[type="text"] {
+            width: 200px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .navbar-menu {
+            display: flex;
+            background: #f9f9f9;
+            padding: 10px 0;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #000;
+            font-size: 1rem;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .navbar-menu a.active {
+            color: #c8a165;
+            font-weight: bold;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-toggle {
+            color: #c8a165;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+        }
+
+        .navbar-menu .dropdown-menu {
+            background-color: #f9f9f9;
+            border: 1px solid #eaeaea;
+        }
+
+        .navbar-menu .dropdown-item:hover {
+            background-color: #c8a165;
+            color: #fff;
+            width: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar-top-bar">
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+            </div>
+            <a href="/profile/login.html" class="account"><i class="bi bi-person"></i></a>
+        </div>
+        <div class="navbar-main">
+            <div class="logo">Pomefiore</div>
+            <div class="icons">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search...">
+                </div>
+                <a href="/wishlist/wishlist.html" class="wishlist-icon" aria-label="Wishlist">
+                    <i class="bi bi-heart"></i>
+                </a>
+                <a href="/cart/cart.html" class="cart-icon" aria-label="Cart">
+                    <i class="bi bi-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="navbar-menu">
+            <a href="/home/home.html" class="menu-item" data-menu="home">Home</a>
+            <div class="dropdown">
+                <a href="/products/allproducts.html" class="menu-item dropdown-toggle" id="allProductsDropdown"
+                    data-menu="all-products">
+                    All Products
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="allProductsDropdown">
+                    <li><a class="dropdown-item" href="/products/tops.html">Tops</a></li>
+                    <li><a class="dropdown-item" href="/products/skirts.html">Skirts</a></li>
+                    <li><a class="dropdown-item" href="/products/shorts.html">Shorts</a></li>
+                    <li><a class="dropdown-item" href="/products/pants.html">Pants</a></li>
+                    <li><a class="dropdown-item" href="/products/outerwears.html">Outerwears</a></li>
+                    <li><a class="dropdown-item" href="/products/overalls.html">Overalls</a></li>
+                </ul>
+            </div>
+            <a href="/newarrivals/newarrivals.html" class="menu-item" data-menu="new-arrivals">New Arrivals</a>
+            <a href="/about/about.html" class="menu-item" data-menu="about">About</a>
+            <a href="/contact/contact.html" class="menu-item" data-menu="contact">Contact</a>
+        </nav>
+    </header>
+</body>
+
+</html>

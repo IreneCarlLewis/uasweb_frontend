@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomefiore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .carousel-item {
+            position: relative;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50% !important;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/akito.jpg" class="d-block w-100" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Step into Elegance</h1>
+                    <p>Discover our latest collection of timeless designs and bold statements.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/akito.jpg" class="d-block w-100" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Unveiling New Arrivals</h1>
+                    <p>Stay ahead of the trend with our exclusive new pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/akito.jpg" class="d-block w-100" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Exclusive Offers</h1>
+                    <p>Limited-time deals on our signature pieces. Don’t miss out!</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    </header>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        // Initialize menu items
+        const menuItems = document.querySelectorAll('.menu-item');
+        const cartCountElement = document.getElementById('cart-count');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        // Example of changing cart count
+        function updateCartCount(count) {
+            cartCountElement.textContent = count;
+        }
+
+        // Set a sample cart count for demonstration
+        updateCartCount(3);
+    </script>
+</body>
+
+</html>

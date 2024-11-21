@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .mostpopular-section {
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .mostpopular-section h2 {
+            padding: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .product-list {
+            margin-left: 20%;
+            margin-right: 20%;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        .product {
+            text-align: center;
+            width: 300px;
+            flex: 0 0 auto;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .product img.hover-img {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product:hover img.main-img {
+            opacity: 0;
+        }
+
+        .product:hover img.hover-img {
+            opacity: 1;
+        }
+
+        .product p {
+            color: grey;
+        }
+
+        .product-list::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .product-list::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .product-list::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+    <section class="mostpopular-section">
+        <h2>Most Popular</h2>
+        <div class="product-list">
+            <a href="product1-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 1" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 1 Hover" class="hover-img">
+                    <h3>Sumi Jacket</h3>
+                    <p>Rp 190.000</p>
+                </div>
+            </a>
+            <a href="product2-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 2" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 2 Hover" class="hover-img">
+                    <h3>Kaze Blazer</h3>
+                    <p>Rp 250.000</p>
+                </div>
+            </a>
+            <a href="product3-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 3" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 3 Hover" class="hover-img">
+                    <h3>Shina Pants</h3>
+                    <p>Rp 135.000</p>
+                </div>
+            </a>
+            <a href="product4-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 4" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 4 Hover" class="hover-img">
+                    <h3>Shiro Dress</h3>
+                    <p>Rp 280.000</p>
+                </div>
+            </a>
+            <a href="product5-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 5" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 5 Hover" class="hover-img">
+                    <h3>Alex Skirt</h3>
+                    <p>Rp 120.000</p>
+                </div>
+            </a>
+            <a href="product6-link.html" class="product-link">
+                <div class="product">
+                    <img src="/images/akito2.jpg" alt="Product 6" class="main-img">
+                    <img src="/images/tsukasa.jpg" alt="Product 6 Hover" class="hover-img">
+                    <h3>Cyrus Sweater</h3>
+                    <p>Rp 175.000</p>
+                </div>
+            </a>
+        </div>
+    </section>
+</body>
+
+</html>
