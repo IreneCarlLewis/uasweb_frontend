@@ -16,10 +16,32 @@
             display: flex;
             gap: 20px;
             padding-top: 20px;
-            padding-left: 10%;
-            padding-right: 10%;
-            padding-bottom: 20px;
+            padding-left: 20%;
+            padding-right: 20%;
             align-items: center;
+            justify-content: center;
+        }
+
+        .filter-section label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 200px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
         }
 
         .products-container {
@@ -117,10 +139,22 @@
                 <option value="highest">Highest Price</option>
             </select>
         </div>
+        <div>
+            <label for="min-price">Min Price:</label>
+            <input type="number" id="min-price" placeholder="Min price" />
+        </div>
+        <div>
+            <label for="max-price">Max Price:</label>
+            <input type="number" id="max-price" placeholder="Max price" />
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search...">
     </div>
 
     <div class="products-container" id="products-container">
-        <a href="/product/Eichi-pants" class="product-card" data-price="150000" data-name="Eichi Pants">
+        <a href="/products/eichi-pants.html" class="product-card" data-price="150000" data-name="Eichi Pants">
             <img src="/images/tsu.jpg" alt="Eichi Pants" class="main-img">
             <img src="/images/tsu2.jpg" alt="Eichi Pants Hover" class="hover-img">
             <div class="product-info">
@@ -129,7 +163,7 @@
             </div>
         </a>
 
-        <a href="/product/Tori-shirt" class="product-card" data-price="180000" data-name="Tori Shirt">
+        <a href="/products/tori-shirt.html" class="product-card" data-price="180000" data-name="Tori Shirt">
             <img src="/images/tsu.jpg" alt="Tori Shirt" class="main-img">
             <img src="/images/tsu2.jpg" alt="Tori Shirt Hover" class="hover-img">
             <div class="product-info">
@@ -138,7 +172,7 @@
             </div>
         </a>
 
-        <a href="/product/Yuzu-shirt" class="product-card" data-price="100000" data-name="Yuzu Shirt">
+        <a href="/products/yuzu-shirt.html" class="product-card" data-price="100000" data-name="Yuzu Shirt">
             <img src="/images/tsu.jpg" alt="Yuzu Shirt" class="main-img">
             <img src="/images/tsu2.jpg" alt="Yuzu Shirt Hover" class="hover-img">
             <div class="product-info">
@@ -147,7 +181,7 @@
             </div>
         </a>
 
-        <a href="/product/Hiwa-jacket" class="product-card" data-price="210000" data-name="Hiwa Jacket">
+        <a href="/products/hiwa-jacket.html" class="product-card" data-price="210000" data-name="Hiwa Jacket">
             <img src="/images/tsu.jpg" alt="Hiwa Jacket" class="main-img">
             <img src="/images/tsu2.jpg" alt="Hiwa Jacket Hover" class="hover-img">
             <div class="product-info">
@@ -156,7 +190,7 @@
             </div>
         </a>
 
-        <a href="/product/Aira-jacket" class="product-card" data-price="220000" data-name="Aira Jacket">
+        <a href="/product/aira-jacket.html" class="product-card" data-price="220000" data-name="Aira Jacket">
             <img src="/images/tsu.jpg" alt="Aira Jacket" class="main-img">
             <img src="/images/tsu2.jpg" alt="Aira Jacket Hover" class="hover-img">
             <div class="product-info">
@@ -165,7 +199,7 @@
             </div>
         </a>
 
-        <a href="/product/Emilio-dress" class="product-card" data-price="350000" data-name="Emilio Dress">
+        <a href="/product/emilio-dress.html" class="product-card" data-price="350000" data-name="Emilio Dress">
             <img src="/images/tsu.jpg" alt="Emilio Dress" class="main-img">
             <img src="/images/tsu2.jpg" alt="Emilio Dress Hover" class="hover-img">
             <div class="product-info">
@@ -173,6 +207,7 @@
                 <p class="product-price">Rp 350.000</p>
             </div>
         </a>
+    </div>
     </div>
 
     <div id="footer-placeholder"></div>
@@ -182,53 +217,77 @@
     <script>
         const productsContainer = document.getElementById('products-container');
         const sortOptions = document.getElementById('sort-options');
+        const minPriceInput = document.getElementById('min-price');
+        const maxPriceInput = document.getElementById('max-price');
         const originalProducts = Array.from(productsContainer.querySelectorAll('.product-card'));
 
-        function filterAndSortProducts() {
-            const sortOption = sortOptions.value;
+        // Function to filter products by price range
+        function filterByPriceRange() {
+            const minPrice = parseInt(minPriceInput.value) || 0;
+            const maxPrice = parseInt(maxPriceInput.value) || Infinity;
 
+            const filteredProducts = originalProducts.filter(product => {
+                const price = parseInt(product.getAttribute('data-price'));
+                return price >= minPrice && price <= maxPrice;
+            });
+
+            // Re-render the products after filtering by price
+            renderProducts(filteredProducts);
+        }
+
+        // Function to render filtered and sorted products
+        function renderProducts(products) {
+            productsContainer.innerHTML = '';
+            products.forEach(product => productsContainer.appendChild(product));
+        }
+
+        // Function to filter and sort products based on selected options
+        function filterAndSortProducts() {
             let products = [...originalProducts];
 
+            // Sort products based on selected option
+            const sortOption = sortOptions.value;
             if (sortOption === 'asc') {
                 products.sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name')));
             } else if (sortOption === 'desc') {
                 products.sort((a, b) => b.getAttribute('data-name').localeCompare(a.getAttribute('data-name')));
             } else if (sortOption === 'lowest') {
-                products.sort((a, b) => {
-                    const priceA = parseInt(a.getAttribute('data-price'));
-                    const priceB = parseInt(b.getAttribute('data-price'));
-                    return priceA - priceB;
-                });
+                products.sort((a, b) => parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price')));
             } else if (sortOption === 'highest') {
-                products.sort((a, b) => {
-                    const priceA = parseInt(a.getAttribute('data-price'));
-                    const priceB = parseInt(b.getAttribute('data-price'));
-                    return priceB - priceA;
-                });
+                products.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
             }
 
-            if (sortOption === 'default') {
-                products = [...originalProducts];
-            }
+            // Filter by price range
+            filterByPriceRange();
 
-            productsContainer.innerHTML = '';
-            products.forEach(product => productsContainer.appendChild(product));
+            // Render the products after sorting and filtering
+            renderProducts(products);
         }
 
+        // Event listener for sorting options
         sortOptions.addEventListener('change', filterAndSortProducts);
 
+        // Event listeners for min and max price input fields
+        minPriceInput.addEventListener('keydown', filterByPriceRange);
+        maxPriceInput.addEventListener('keydown', filterByPriceRange);
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const filteredProducts = originalProducts.filter(card => card.getAttribute('data-name').toLowerCase().includes(query));
+            renderProducts(filteredProducts);
+        });
+
+        // Load navbar and footer
         fetch('/navigation/navbar.html')
             .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-            })
+            .then(data => document.getElementById('navbar-placeholder').innerHTML = data)
             .catch(error => console.error('Error loading navbar:', error));
 
         fetch('/navigation/footer.html')
             .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
+            .then(data => document.getElementById('footer-placeholder').innerHTML = data)
             .catch(error => console.error('Error loading footer:', error));
     </script>
 </body>
