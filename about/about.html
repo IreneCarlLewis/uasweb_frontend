@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomefiore</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
 
     <style>
         body {
@@ -17,7 +18,11 @@
 
 <body>
     <div id="navbar-placeholder"></div>
+    <div id="journey-placeholder"></div>
+    <div id="vision-mission-placeholder"></div>
+    <div id="our-team-placeholder"></div>
     <div id="footer-placeholder"></div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -28,12 +33,35 @@
             })
             .catch(error => console.error('Error loading navbar:', error));
 
+        fetch('/about/journey.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('journey-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading journey:', error));
+
+        fetch('/about/visionmission.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('vision-mission-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading our vission and mission:', error))
+
+        fetch('/about/ourteam.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('our-team-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading our team section:', error));
+
         fetch('/navigation/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading navbar:', error));
+
+
 
     </script>
 
