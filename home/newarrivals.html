@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Arrivals Slider</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        .carousel-item {
+            padding: 40px;
+            background-color: #eddbbf;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item img {
+            border-radius: 10px;
+        }
+
+        h2 {
+            padding-top: 20px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: black;
+        }
+
+        .product-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .product-option img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-option p {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="new-arrivals">
+        <h2 class="text-center mb-5">Our Up Coming Edition are Landing</h2>
+
+        <div id="newArrivalsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="/images/enha.jpg" class="img-fluid" alt="Style Pick 1">
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Jingle Style</h3>
+                            <p>write something here</p>
+                            <div class="product-options">
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 1">
+                                    <p>CityBreeze<br><small>Knitted Navy</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 2">
+                                    <p>Levar<br><small>Front Zip Collar Knit</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 3">
+                                    <p>Siyazu<br><small>Brown Knit</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 order-md-2">
+                            <img src="/images/enha.jpg" class="img-fluid" alt="Style Pick 2">
+                        </div>
+                        <div class="col-md-6 order-md-1">
+                            <h3>Winter Essentials</h3>
+                            <p>write something here</p>
+                            <div class="product-options">
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 1">
+                                    <p>FrontRow<br><small>Eco Leather Pants</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 2">
+                                    <p>Awesome Studio<br><small>Dark Denim</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 3">
+                                    <p>AEER<br><small>Eco Leather Pants</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="/images/enha.jpg" class="img-fluid" alt="Style Pick 3">
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Ready for Christmas Eve</h3>
+                            <p>write something here</p>
+                            <div class="product-options">
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 1">
+                                    <p>UGG<br><small>Classic Boots</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 2">
+                                    <p>Komorebi<br><small>Mini Boots</small></p>
+                                </div>
+                                <div class="product-option">
+                                    <img src="/images/enha.jpg" alt="Option 3">
+                                    <p>Clarks<br><small>Wallabee</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#newArrivalsCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#newArrivalsCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
