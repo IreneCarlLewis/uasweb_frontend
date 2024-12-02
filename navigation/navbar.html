@@ -68,6 +68,10 @@
             position: relative;
         }
 
+        .icons a:hover {
+            color: #c8a165;
+        }
+
         .cart-count {
             position: absolute;
             top: -8px;
@@ -81,6 +85,8 @@
 
         .navbar-menu {
             display: flex;
+            justify-content: center;
+            align-items: center;
             background: #f9f9f9;
             padding: 10px 0;
         }
@@ -91,10 +97,12 @@
             font-size: 1rem;
             margin: 0 15px;
             position: relative;
+            padding: 5px 10px;
         }
 
+        .navbar-menu a:hover,
         .navbar-menu a.active {
-            color: #c8a165;
+            color: #65141d;
             font-weight: bold;
         }
 
@@ -112,11 +120,12 @@
         }
 
         .dropdown:hover .dropdown-toggle {
-            color: #c8a165;
+            color: #65141d;
         }
 
         .dropdown-menu {
             margin-top: 0;
+
         }
 
         .navbar-menu .dropdown-menu {
@@ -125,7 +134,7 @@
         }
 
         .navbar-menu .dropdown-item:hover {
-            background-color: #c8a165;
+            background-color: #65141d;
             color: #fff;
             width: inherit;
         }
@@ -177,7 +186,6 @@
                     <li><a class="dropdown-item" href="/products/overalls.html">Overalls</a></li>
                 </ul>
             </div>
-            <a href="/newarrivals/newarrivals.html" class="menu-item" data-menu="new-arrivals">New Arrivals</a>
             <a href="/about/about.html" class="menu-item" data-menu="about">About</a>
             <a href="/contact/contact.html" class="menu-item" data-menu="contact">Contact</a>
         </nav>
