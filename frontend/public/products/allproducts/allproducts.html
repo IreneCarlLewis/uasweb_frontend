@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="productApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomefiore</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 20px;
+            padding-top: 20px;
+            padding-left: 20%;
+            padding-right: 20%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-section label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 200px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 20px;
+        }
+
+        .product-card {
+            width: calc(25% - 20px);
+            border: 1px solid #eaeaea;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            cursor: pointer;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-info {
+            padding: 10px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: grey;
+        }
+
+        .sold-out {
+            margin-top: 5px;
+            font-size: 12px;
+            color: gray;
+        }
+
+        .product-card img.hover-img {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card img.main-img {
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover img.main-img {
+            opacity: 0;
+        }
+
+        .product-card:hover img.hover-img {
+            opacity: 1;
+        }
+
+        .btn {
+            background-color: #65141d !important;
+            border-color: #65141d !important;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .button-group button {
+            background-color: #65141d;
+            color: #fff;
+            width: 200px;
+            border: none;
+            padding: 10px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #4a0f15;
+        }
+
+        .button-group button:active {
+            transform: scale(0.95);
+        }
+
+        .button-group button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<div id="navbar-placeholder"></div>
+
+<body ng-controller="ProductController">
+    <div class="filter-section">
+        <label for="sort-options">Sort by:</label>
+        <select id="sort-options" ng-model="sortOption">
+            <option value="default">Default</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="-name">Name (Z-A)</option>
+            <option value="price">Lowest Price</option>
+            <option value="-price">Highest Price</option>
+        </select>
+
+        <label for="min-price">Min Price:</label>
+        <input type="number" id="min-price" ng-model="minPrice" placeholder="Min price">
+
+        <label for="max-price">Max Price:</label>
+        <input type="number" id="max-price" ng-model="maxPrice" placeholder="Max price">
+
+    </div>
+    <div class="button-group">
+        <button ng-click="applyFilters()" class="btn-filter">Filter</button>
+        <button ng-click="resetFilters()" class="btn-reset">Reset</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" ng-model="searchQuery" placeholder="Search products...">
+    </div>
+
+    <div class="products-container">
+        <a href="{{product.link}}" class="product-card"
+            ng-repeat="product in products | filter:searchFilter | orderBy:sortOption">
+            <img ng-src="{{product.mainImg}}" alt="{{product.name}}" class="main-img">
+            <img ng-src="{{product.hoverImg}}" alt="{{product.name}} Hover" class="hover-img">
+            <div class="product-info">
+                <p class="product-name">{{product.name}}</p>
+                <p class="product-price">Rp {{product.price | number}}</p>
+            </div>
+        </a>
+    </div>
+
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="allproducts.js"></script>
+    <script>
+        fetch('/frontend/public/navigation/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/frontend/public/navigation/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+
+</html>

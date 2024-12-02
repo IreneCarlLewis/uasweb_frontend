@@ -26,35 +26,35 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        fetch('/navigation/navbar.html')
+        fetch('../navigation/navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading navbar:', error));
 
-        fetch('/about/journey.html')
+        fetch('../about/journey.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('journey-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading journey:', error));
 
-        fetch('/about/visionmission.html')
+        fetch('../about/visionmission.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('vision-mission-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading our vission and mission:', error))
 
-        fetch('/about/ourteam.html')
+        fetch('../about/ourteam.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('our-team-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading our team section:', error));
 
-        fetch('/navigation/footer.html')
+        fetch('../navigation/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;

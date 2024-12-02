@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="contactApp">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,18 +16,20 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        .bg-color{
-            background-color: #eddbbf ;
-        }
-        .button-color{
-            background-color : #65141d;
-        }
-        .text-title{
-            color:#65141d;
+        .bg-color {
+            background-color: #eddbbf;
         }
 
-        .tumpul{
-            border-radius: 8px; 
+        .button-color {
+            background-color: #65141d;
+        }
+
+        .text-title {
+            color: #65141d;
+        }
+
+        .tumpul {
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -34,20 +37,23 @@
 <body ng-controller="contactController">
 
     <div id="navbar-placeholder"></div>
-    <div class="container tumpul mb-5 mt-5 bg-color pb-4 pt-2" >
+    <div class="container tumpul mb-5 mt-5 bg-color pb-4 pt-2">
         <h2 class="text-center mb-4 text-title">Contact Us</h2>
         <form ng-submit="submitForm()">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" id="name" class="form-control" ng-model="contact.name" placeholder="Enter your name" required>
+                <input type="text" id="name" class="form-control" ng-model="contact.name" placeholder="Enter your name"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" class="form-control" ng-model="contact.email" placeholder="Enter your email" required>
+                <input type="email" id="email" class="form-control" ng-model="contact.email"
+                    placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
-                <textarea id="message" class="form-control" ng-model="contact.message" rows="5" placeholder="Write your message" required></textarea>
+                <textarea id="message" class="form-control" ng-model="contact.message" rows="5"
+                    placeholder="Write your message" required></textarea>
             </div>
             <button type="submit" class="button-color tumpul w-100 text-white">Submit</button>
         </form>
@@ -63,14 +69,14 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        fetch('/navigation/navbar.html')
+        fetch('../navigation/navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Error loading navbar:', error));
 
-        fetch('/navigation/footer.html')
+        fetch('../navigation/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
