@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tops</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="../products/allproducts/allproducts.js"></script>
+    <script src="/frontend/src/product/product.module.js"></script>
+    <script src="/frontend/src/product/product.controller.js"></script>
+    <script src="/frontend/src/product/product.server.js"></script>
+    <script src="/frontend/public/products/allproducts/allproducts.js"></script>
+
     <style>
         body {
             margin: 0;
@@ -189,12 +193,10 @@
     </div>
 
     <div class="products-container">
-        <a href="{{product.link}}" class="product-card" ng-repeat="product in products 
-                      | filter: searchFilter 
-                      | filter:{ category: 'Pants' }
-                      | orderBy: sortOption">
-            <img ng-src="{{product.mainImg}}" alt="{{product.name}}" class="main-img">
-            <img ng-src="{{product.hoverImg}}" alt="{{product.name}} Hover" class="hover-img">
+        <a href="{{product.link}}" class="product-card"
+            ng-repeat="product in products | filter:searchFilter | filter:{ category: 'Pants' } | orderBy:sortOption">
+            <img ng-src="{{product.mainImage}}" alt="{{product.name}}" class="main-img">
+            <img ng-src="{{product.hoverImage}}" alt="{{product.name}} Hover" class="hover-img">
             <div class="product-info">
                 <p class="product-name">{{product.name}}</p>
                 <p class="product-price">Rp {{product.price | number}}</p>
