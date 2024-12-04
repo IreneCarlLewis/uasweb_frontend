@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import connectDB from "./backend/config/database.js";
 import userRoutes from "./backend/routes/userRoutes.js";
+import productRoutes from "./backend/routes/productRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -14,6 +15,7 @@ const MONGOURL = process.env.MONGO_URL;
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 connectDB(MONGOURL);
 
