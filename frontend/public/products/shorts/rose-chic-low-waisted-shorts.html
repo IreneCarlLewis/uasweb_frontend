@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="productApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tori Slim Fit Crop Tee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/frontend/src/product/product.module.js"></script>
+    <script src="/frontend/src/product/product.controller.js"></script>
+    <script src="/frontend/src/product/product.server.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .product-info {
+            margin-top: 20px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: grey;
+        }
+
+        .wishlist-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .wishlist-icon.active {
+            color: red;
+        }
+
+        .cart-actions {
+            margin-top: 20px;
+        }
+
+        .product-details {
+            margin-top: 30px;
+        }
+
+        .product-details h5 {
+            font-weight: bold;
+        }
+
+        .comment-section {
+            margin-top: 40px;
+        }
+
+        .comment-box {
+            margin-bottom: 20px;
+        }
+
+        .comment-box input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        /* Custom button style for all buttons */
+        .btn {
+            background-color: #65141d !important;
+            border-color: #65141d;
+            color: white !important;
+            font-size: 18px !important;
+        }
+
+        .btn:hover,
+        .btn:focus,
+        .btn:active {
+            background-color: #5c0f17 !important;
+            border-color: #5c0f17 !important;
+            color: white !important;
+        }
+
+        /* Specific button for collapsing product details */
+        .btn-info {
+            background-color: #65141d !important;
+            border-color: #65141d !important;
+            color: white;
+        }
+
+        .btn-info:hover,
+        .btn-info:focus,
+        .btn-info:active {
+            background-color: #5c0f17 !important;
+            border-color: #5c0f17 !important;
+            color: white !important;
+        }
+
+        .col-md-6 {
+            background-color: #eddbbf;
+            padding: 20px;
+            border-radius: 5%;
+        }
+
+        img {
+            border-radius: 5%;
+        }
+
+        h2 {
+            font-size: 45px !important;
+        }
+
+        p {
+            font-size: 20px !important;
+        }
+
+        label {
+            font-size: 18px !important;
+        }
+
+        li {
+            font-size: 18px !important;
+        }
+    </style>
+</head>
+
+<body ng-controller="ProductController">
+    <div id="navbar-placeholder"></div>
+
+    <!-- Product Info -->
+    <div class="container product-info">
+        <div class="row">
+            <div class="col-md-6">
+
+                <!-- Carousel -->
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" class="active"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" class="active"
+                            aria-label="Slide 3"></button>
+                    </div>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img ng-src="{{product.images[0]}}" class="d-block w-100"
+                                alt="Rose Chic Low Waisted Shorts">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img ng-src="{{product.images[1]}}" class="d-block w-100"
+                                alt="Rose Chic Low Waisted Shorts">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img ng-src="{{product.images[2]}}" class="d-block w-100"
+                                alt="Rose Chic Low Waisted Shorts">
+                        </div>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <!-- Product Title -->
+                <h2 class="product-name">{{product.name}}</h2>
+                <!-- Product Price -->
+                <p class="product-price">Rp {{product.price | number}}</p>
+
+                <!-- Quantity Selector -->
+                <div class="mt-3">
+                    <label>Quantity:</label>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-secondary" ng-click="decreaseQuantity()">-</button>
+                        <input type="number" ng-model="cartQuantity" class="form-control w-25 mx-2" min="1" readonly>
+                        <button class="btn btn-secondary" ng-click="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <!-- Wishlist, Add to Cart, and Checkout on the same line -->
+                <div class="d-flex align-items-center mt-3">
+                    <span class="wishlist-icon" ng-class="{'active': product.isInWishlist}" ng-click="toggleWishlist()">
+                        &#10084;
+                    </span>
+                    <button class="btn btn-primary ms-3" ng-click="addToCart()">Add to Cart</button>
+                    <button class="btn btn-success ms-3" ng-click="checkout()">Checkout</button>
+                </div>
+
+                <!-- Collapsible Product Details Section -->
+                <div class="product-details mt-3">
+                    <button class="btn btn-info" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#productDetails" aria-expanded="false" aria-controls="productDetails">
+                        View Product Details ▾
+                    </button>
+                    <div class="collapse" id="productDetails">
+                        <ul class="list-unstyled mt-3">
+                            <li><strong>Style:</strong> Street, Acubi</li>
+                            <li><strong>Occasion:</strong> Back to school</li>
+                            <li><strong>Print:</strong> Washed</li>
+                            <li><strong>Material:</strong> Cotton, Denim, Spandex</li>
+                            <li><strong>Fit:</strong> Slim fit</li>
+                            <li><strong>Cotton:</strong> 99%, Spandex: 1%</li>
+                            <li><strong>Color:</strong> Blue</li>
+                            <li><strong>Made in:</strong> Korea</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Comments Section -->
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <div class="comment-box">
+                <input type="text" ng-model="newComment" placeholder="Leave a comment..."
+                    ng-keyup="submitComment($event)">
+            </div>
+
+            <div class="comments-list">
+                <div class="comment" ng-repeat="comment in product.comments">
+                    <p><strong>{{comment.author}}:</strong> {{comment.text}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        angular.module('productApp', [])
+            .controller('ProductController', function ($scope, productService) {
+                $scope.product = {};
+                $scope.cartQuantity = 1;
+                $scope.newComment = '';
+
+                // Fetch product data (for simplicity, data can be mocked here)
+                $scope.product = {
+                    name: 'Rose Chic Low Waisted Shorts',
+                    price: 360000,
+                    images: [
+                        '/frontend/public/images/products/shorts/O_1.jpg',
+                        '/frontend/public/images/products/shorts/O_2.jpg',
+                        '/frontend/public/images/products/shorts/O_3.jpg'
+                    ],
+                    isInWishlist: false,
+                    comments: []
+                };
+
+                // Toggle Wishlist
+                $scope.toggleWishlist = function () {
+                    $scope.product.isInWishlist = !$scope.product.isInWishlist;
+                };
+
+                // Add to Cart
+                $scope.addToCart = function () {
+                    alert('Product added to cart!');
+                };
+
+                // Update Cart Quantity
+                $scope.decreaseQuantity = function () {
+                    if ($scope.cartQuantity > 1) {
+                        $scope.cartQuantity--;
+                    }
+                };
+
+                $scope.increaseQuantity = function () {
+                    $scope.cartQuantity++;
+                };
+
+                // Submit Comment
+                $scope.submitComment = function (event) {
+                    if (event.key === 'Enter' && $scope.newComment.trim()) {
+                        const newComment = { author: 'Guest', text: $scope.newComment };
+                        $scope.product.comments.push(newComment);
+                        $scope.newComment = ''; // Clear input
+                    }
+                };
+
+                // Checkout function (for demo purpose)
+                $scope.checkout = function () {
+                    alert('Proceeding to checkout...');
+                };
+            })
+            .service('productService', function ($http) {
+                this.getProduct = function (id) {
+                    return $http.get('/api/products/' + id);
+                };
+            });
+    </script>
+    <script>
+        fetch('/frontend/public/navigation/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/frontend/public/navigation/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+
+</html>
