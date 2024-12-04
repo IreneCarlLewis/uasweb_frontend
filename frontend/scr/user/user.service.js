@@ -5,4 +5,9 @@ angular.module('myApp').service('userService', function($http) {
     this.createUser = function(user) {
         return $http.post(API_URL, user);
     };
+
+    // Fungsi untuk login user
+    this.loginUser = function(loginData) {
+        return $http.post(`${API_URL}/login`, loginData);
+    };
 });
