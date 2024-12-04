@@ -10,6 +10,7 @@ const router = express.Router();
 
 // Mendapatkan semua produk
 router.get('/', getProducts);
+router.get('/', getProducts);
 
 // Membuat produk baru
 router.post('/', createProduct);
