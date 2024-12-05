@@ -1,30 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="aboutApp">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomefiore</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Cormorant Garamond', serif;
-        }
-    </style>
+    <title>About Us - Pomefiore</title>
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="about.js"></script>
 </head>
 
-<body>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Cormorant Garamond', serif;
+    }
+
+    .journey-section {
+        background-color: #eddbbf;
+        padding: 60px 20px;
+    }
+
+    .journey-section h2 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .timeline {
+        position: relative;
+    }
+
+    .timeline-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        background: #65141d;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .timeline-item img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 20px;
+    }
+
+    .timeline-item:nth-child(even) img {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
+    .timeline-item h4 {
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .timeline-item p {
+        margin: 0;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .timeline-item {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .timeline-item img {
+            margin: 0 0 20px 0;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+    }
+
+    .big-image-section {
+        background-color: #eddbbf;
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .big-image-container {
+        max-width: 80%;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .big-image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .caption {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .big-image-container img {
+            height: 400px;
+        }
+    }
+
+    .our-team-section {
+        background-color: #eddbbf;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .our-team-title {
+        margin-bottom: 40px;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .team-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .team-member {
+        background: #65141d;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+
+    .team-member h5 {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .team-member p {
+        font-size: 0.9rem;
+        color: white;
+    }
+
+    .vision-mission-section {
+        background-color: #eddbbf;
+        padding: 60px 20px;
+    }
+
+    .vision-mission-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .vision-mission-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .vision-mission-item {
+        text-align: center;
+        width: 250px;
+        padding: 20px;
+        background: #65141d;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .vision-mission-item img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    .vision-mission-item h5 {
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .vision-mission-item p {
+        font-size: 14px;
+        color: white;
+    }
+</style>
+
+<body ng-controller="AboutController">
     <div id="navbar-placeholder"></div>
-    <div id="journey-placeholder"></div>
-    <div id="vision-mission-placeholder"></div>
-    <div id="our-team-placeholder"></div>
-    <div id="footer-placeholder"></div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Journey and Achievements -->
+    <section class="journey-section">
+        <div class="container">
+            <h2>Our Journey and Achievements</h2>
+            <div class="timeline">
+                <div class="timeline-item" ng-repeat="journey in journeys">
+                    <img ng-src="{{ journey.image }}" alt="{{ journey.year }} Journey">
+                    <div>
+                        <h4>{{ journey.year }}</h4>
+                        <p>{{ journey.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Image -->
+    <section class="big-image-section">
+        <div class="container">
+            <div class="big-image-container">
+                <img ng-src="{{ bigImage.image }}" alt="{{ bigImage.altText }}">
+            </div>
+            <div class="caption">
+                <p>{{ bigImage.caption }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section class="our-team-section">
+        <div class="container">
+            <h2 class="our-team-title">Meet Our Team</h2>
+            <div class="team-container">
+                <div class="team-member" ng-repeat="member in team">
+                    <img ng-src="{{ member.image }}" alt="{{ member.name }}">
+                    <h5>{{ member.name }}</h5>
+                    <p>{{ member.position }}<br>{{ member.description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visi Misi -->
+    <section class="vision-mission-section">
+        <div class="container">
+            <h2 class="vision-mission-title">Our Vision & Mission</h2>
+            <div class="vision-mission-container">
+                <div class="vision-mission-item" ng-repeat="mission in visionMissions">
+                    <img ng-src="{{ mission.image }}" alt="{{ mission.title }}">
+                    <h5>{{ mission.title }}</h5>
+                    <p>{{ mission.description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         fetch('../navigation/navbar.html')
             .then(response => response.text())
@@ -33,38 +276,14 @@
             })
             .catch(error => console.error('Error loading navbar:', error));
 
-        fetch('../about/journey.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('journey-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading journey:', error));
-
-        fetch('../about/visionmission.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('vision-mission-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading our vission and mission:', error))
-
-        fetch('../about/ourteam.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('our-team-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading our team section:', error));
-
         fetch('../navigation/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
             })
-            .catch(error => console.error('Error loading navbar:', error));
-
-
-
+            .catch(error => console.error('Error loading footer:', error));
     </script>
-
+    <div id="footer-placeholder"></div>
 </body>
 
 </html>

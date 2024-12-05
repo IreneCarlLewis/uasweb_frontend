@@ -6,6 +6,7 @@ import userRoutes from "./backend/routes/userRoutes.js";
 import productRoutes from "./backend/routes/productRoutes.js";
 import wishlistRoutes from "./backend/routes/wishlistRoutes.js";
 import cartRoutes from "./backend/routes/cartRoutes.js";
+import commentRoutes from "./backend/routes/commentRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -20,6 +21,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/comments", commentRoutes);
+
 
 connectDB(MONGOURL);
 
