@@ -17,19 +17,19 @@ const productSchema = new mongoose.Schema({
         trim: true,
     },
     mainImage: {
-        type: String, // URL untuk gambar utama
+        type: String,
         required: true,
     },
     hoverImage: {
-        type: String, // URL untuk gambar hover
+        type: String,
         required: true,
     },
     link: {
-        type: String, // URL untuk tautan produk
+        type: String,
         required: true,
     },
 }, {
-    timestamps: true, // Menambahkan createdAt dan updatedAt
+    timestamps: true,
 });
 
 const Product = mongoose.model('Product', productSchema);

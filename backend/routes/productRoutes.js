@@ -1,6 +1,7 @@
 import express from 'express';
 import {
     getProducts,
+    getProduct,
     createProduct,
     updateProduct,
     deleteProduct
@@ -10,7 +11,9 @@ const router = express.Router();
 
 // Mendapatkan semua produk
 router.get('/', getProducts);
-router.get('/', getProducts);
+
+// Mendapatkan produk berdasarkan ID
+router.get('/:id', getProduct);
 
 // Membuat produk baru
 router.post('/', createProduct);
