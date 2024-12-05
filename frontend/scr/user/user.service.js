@@ -10,4 +10,14 @@ angular.module('myApp').service('userService', function($http) {
     this.loginUser = function(loginData) {
         return $http.post(`${API_URL}/login`, loginData);
     };
+
+    // Fungsi untuk memperbarui user
+    this.updateUser = function(userId, updateData) {
+        return $http.put(`${API_URL}/${userId}`, updateData);
+    };
+
+    // Fungsi untuk menghapus user
+    this.deleteUser = function(userId) {
+        return $http.delete(`${API_URL}/${userId}`);
+    };
 });

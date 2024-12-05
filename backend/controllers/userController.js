@@ -82,9 +82,52 @@ export const loginUser = async (req, res) => {
         // Kirimkan data user dan token ke client
         res.status(200).json({
             message: "Login successful!",
-            user: { name: user.name, email: user.email },
+            user: { id: user.id, name: user.name, email: user.email, phone: user.phone, address: user.address },
             token, // Sertakan token dalam respons
         });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Mengedit pengguna berdasarkan ID
+export const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { email, phone, address } = req.body;
+
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found!" });
+        }
+
+        // Perbarui hanya field yang diberikan
+        if (email) user.email = email;
+        if (phone) user.phone = phone;
+        if (address) user.address = address;
+
+        const updatedUser = await user.save();
+        res.status(200).json({
+            message: "User updated successfully!",
+            user: { name: updatedUser.name, email: updatedUser.email, phone: updatedUser.phone, address: updatedUser.address }
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    const { id } = req.params; // Ambil ID dari params
+
+    try {
+        // Cari dan hapus pengguna berdasarkan ID
+        const user = await User.findByIdAndDelete(id);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found!" });
+        }
+
+        res.status(200).json({ message: "User deleted successfully!" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
