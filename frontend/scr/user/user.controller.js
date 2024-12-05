@@ -20,7 +20,7 @@ angular.module('myApp').controller('AppController', function($scope, userService
     };
 
     // Fungsi untuk login
-    $scope.loginUser = function () {
+    $scope.loginUser = function() {
         userService.loginUser($scope.loginData)
             .then((response) => {
                 console.log("Response from server:", response.data);
@@ -28,22 +28,16 @@ angular.module('myApp').controller('AppController', function($scope, userService
                 // Simpan data pengguna di localStorage
                 const user = response.data.user;
                 const token = response.data.token;
-                const tokenExpiry = response.data.tokenExpiry;
     
-                if (user && token && tokenExpiry) {
+                if (user && token) {
                     localStorage.setItem("user", JSON.stringify(user));
                     localStorage.setItem("token", token);
-                    localStorage.setItem("tokenExpiry", tokenExpiry);
-                    console.log("User, Token, and Expiry saved in localStorage:",
-                        localStorage.getItem("user"),
-                        localStorage.getItem("token"),
-                        localStorage.getItem("tokenExpiry")
-                    );
+                    console.log("User and Token saved in localStorage:", localStorage.getItem("user"), localStorage.getItem("token"));
     
                     alert('Login successful! Welcome, ' + user.name);
                     window.location.href = '/frontend/public/home/home.html';
                 } else {
-                    console.error("User, token, or expiry missing in response!");
+                    console.error("User or token missing in response!");
                 }
             })
             .catch((error) => {
@@ -51,6 +45,5 @@ angular.module('myApp').controller('AppController', function($scope, userService
                 const message = error.data?.message || 'An error occurred during login.';
                 alert('Login failed: ' + message);
             });
-    };
-
+    };    
 });
