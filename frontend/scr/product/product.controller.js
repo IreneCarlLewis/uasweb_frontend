@@ -42,23 +42,48 @@ angular.module('productApp')
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
         };
 
-        // Add to Cart (Mock function)
+        // Add to Cart
         $scope.addToCart = function (product) {
-            alert('Product added to cart: ' + product.name);
-        };
+            // Check if product is already in the cart
+            const cartItemIndex = $scope.cart.findIndex(item => item._id === product._id);
 
-        // Update Cart Quantity (Mock function)
-        $scope.updateCart = function () {
-            console.log('Quantity updated to: ' + $scope.cartQuantity);
-        };
-
-        // Submit Comment (Add new comment to product)
-        $scope.submitComment = function (event) {
-            if (event.key === 'Enter' && $scope.newComment.trim()) {
-                const newComment = { author: 'Guest', text: $scope.newComment };
-                $scope.product.comments.push(newComment);
-                $scope.newComment = ''; // Clear input
+            if (cartItemIndex > -1) {
+                // If product exists, update the quantity
+                $scope.cart[cartItemIndex].quantity++;
+            } else {
+                // If product doesn't exist, add to cart with quantity 1
+                $scope.cart.push({
+                    ...product,
+                    quantity: 1
+                });
             }
+
+            // Save updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            alert('Product added to cart!');
+        };
+
+        // Update Cart Quantity
+        $scope.updateCart = function (product) {
+            const cartItemIndex = $scope.cart.findIndex(item => item._id === product._id);
+            if (cartItemIndex > -1) {
+                // Update quantity in the cart
+                $scope.cart[cartItemIndex].quantity = product.quantity;
+
+                // Save updated cart to localStorage
+                localStorage.setItem('cart', JSON.stringify($scope.cart));
+                alert('Cart updated successfully!');
+            }
+        };
+
+        // Remove from Cart
+        $scope.removeFromCart = function (productId) {
+            // Remove the product from the cart
+            $scope.cart = $scope.cart.filter(item => item._id !== productId);
+
+            // Update localStorage with new cart data
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            alert('Item removed from cart!');
         };
 
         // Checkout function (for demo purpose)

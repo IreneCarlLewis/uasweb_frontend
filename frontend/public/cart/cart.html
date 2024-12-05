@@ -1,24 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="cartApp">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Pomefiore</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Cormorant Garamond', serif;
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/frontend/src/product/product.module.js"></script>
+    <script src="/frontend/src/product/product.controller.js"></script>
+    <script src="/frontend/src/product/product.server.js"></script>
+    <script src="/frontend/public/cart/style.cart.css"></script>
+    <link rel="stylesheet" href="/frontend/public/cart/style.cart.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Your Cart</title>
 </head>
 
-<body>
+<body ng-controller="CartController">
     <div id="navbar-placeholder"></div>
+
+    <div class="container mt-5">
+        <h1>Your Cart</h1>
+
+        <!-- Loading Indicator -->
+        <div ng-if="loading">
+            <p>Loading your cart...</p>
+        </div>
+
+        <!-- Cart Items -->
+        <div class="row" ng-if="!loading && cart.length > 0">
+            <div class="col-md-4" ng-repeat="item in cart">
+                <div class="card mb-4">
+                    <img ng-src="{{item.product.images[0]}}" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.product.name}}</h5>
+                        <p class="card-text">Rp {{item.product.price | number}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Plus and Minus Buttons for Quantity -->
+                            <button class="btn btn-outline-secondary" ng-click="decreaseQuantity(item)">-</button>
+                            <span>{{item.quantity}}</span>
+                            <button class="btn btn-outline-secondary" ng-click="increaseQuantity(item)">+</button>
+                            <button class="btn btn-danger" ng-click="removeFromCart(item.product._id)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Cart Message -->
+        <div ng-if="!loading && cart.length === 0">
+            <p>Your cart is empty. Start adding items to your cart!</p>
+        </div>
+
+        <!-- Cart Summary -->
+        <div ng-if="cart.length > 0">
+            <div class="d-flex justify-content-between mt-4">
+                <h4>Total</h4>
+                <p class="fw-bold">Rp {{getTotal() | number}}</p>
+            </div>
+            <div class="mt-4 d-flex justify-content-end">
+                <button class="btn btn-success" ng-click="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Continue Shopping Button -->
+        <div class="mt-4 d-flex justify-content-start">
+            <a href="/frontend/public/products/allproducts/allproducts.html" class="btn btn-info mb-3">Continue Shopping</a>
+        </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    angular.module('cartApp', [])
+    .controller('CartController', function ($scope) {
+        $scope.cart = [];
+        $scope.loading = false;
+
+        // Load cart from localStorage
+        const storedCart = localStorage.getItem('cart');
+        console.log('Stored cart:', storedCart);  // Debugging log
+
+        // Parse cart if it exists
+        $scope.cart = storedCart ? JSON.parse(storedCart) : [];
+        console.log('Cart after parsing:', $scope.cart);  // Debugging log
+
+        // Add to Cart function (adjusted to match the logic from the second code)
+        $scope.addToCart = function () {
+            // Check if the product already exists in the cart
+            const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
+            if (existingProductIndex > -1) {
+                // If the product is already in the cart, update the quantity
+                $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
+            } else {
+                // If the product is not in the cart, add it
+                $scope.cart.push({
+                    product: angular.copy($scope.product),
+                    quantity: $scope.cartQuantity
+                });
+            }
+
+            // Save the updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+
+            // Notify the user that the product was added to the cart
+            alert('Product added to cart!');
+        };
+
+        // Update item quantity when + button is clicked
+        $scope.increaseQuantity = function (item) {
+            item.quantity++; // Increase quantity by 1
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            console.log('Updated cart after increasing quantity:', $scope.cart);  // Debugging log
+        };
+
+        // Update item quantity when - button is clicked
+        $scope.decreaseQuantity = function (item) {
+            if (item.quantity > 1) {
+                item.quantity--; // Decrease quantity by 1
+                localStorage.setItem('cart', JSON.stringify($scope.cart));
+                console.log('Updated cart after decreasing quantity:', $scope.cart);  // Debugging log
+            }
+        };
+
+        // Remove item from cart
+        $scope.removeFromCart = function (productId) {
+            console.log('Removing item: ' + productId);  // Debugging log
+
+            // Remove the product from the cart array
+            $scope.cart = $scope.cart.filter(item => item.product._id !== productId);
+
+            // Update localStorage with the new cart
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+
+            console.log('Updated cart after removal:', $scope.cart);  // Debugging log
+
+            alert('Item removed from cart');
+        };
+
+        // Calculate total price
+        $scope.getTotal = function () {
+            return $scope.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+        };
+
+        // Proceed to checkout
+        $scope.checkout = function () {
+            if ($scope.cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+
+            // Clear the cart after checkout
+            $scope.cart = [];
+            localStorage.removeItem('cart');
+
+            alert('Payment successful. Cart is now empty.');
+        };
+    });
+
+    </script>
+
     <script>
         fetch('/frontend/public/navigation/navbar.html')
             .then(response => response.text())
@@ -34,7 +174,6 @@
             })
             .catch(error => console.error('Error loading footer:', error));
     </script>
-
 </body>
 
 </html>

@@ -1,0 +1,41 @@
+/* Default button style */
+.btn.btn-success {
+    background-color: white !important;
+    border-color: #65141d!important;
+    color: #65141d !important;
+    font-size: 18px !important;
+    transition: all 0.3s ease; /* Menambahkan transisi halus untuk efek */
+}
+
+/* Hover effect: warna tombol berubah menjadi putih */
+.btn.btn-success:hover {
+    background-color: #65141d !important;
+    border-color: white !important;
+    color: white !important;
+}
+
+/* Active (clicked) effect: tombol menjadi zoom */
+.btn.btn-success:active {
+    transform: scale(0.95); /* Mengubah ukuran tombol sedikit lebih kecil saat diklik */
+}
+
+
+.btn.btn-info{
+    background-color: #65141d !important;
+    border-color: white!important;
+    color: white!important;
+    font-size: 18px !important;
+    transition: all 0.3s ease; 
+    
+}
+
+.btn.btn-info:hover {
+    background-color: white !important;
+    border-color: #65141d !important;
+    color: #65141d!important;
+}
+
+
+.btn.btn-info:active {
+    transform: scale(0.95); /* Mengubah ukuran tombol sedikit lebih kecil saat diklik */
+}
