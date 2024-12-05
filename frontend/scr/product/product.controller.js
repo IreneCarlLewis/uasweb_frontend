@@ -1,44 +1,58 @@
-// frontend/src/product/product.controller.js
 angular.module('productApp')
     .controller('ProductController', function ($scope, productService) {
+        // Initialize variables
         $scope.products = [];
-        $scope.product = {};
-        $scope.productId = "67501d65708c9617abd1c85a";  // ID produk untuk contoh, ganti sesuai dengan produk yang diinginkan
 
-        // Mengambil data produk berdasarkan ID (misalnya ID produk "caroline-slim-fit-flared-jeans")
-        productService.getProduct($scope.productId)
+        // Load all products for display
+        productService.getProducts()  // Assuming productService gets all products
             .then(function (response) {
-                $scope.product = response;
-            })
-            .catch(function (error) {
-                console.error('Error fetching product:', error);
-            });
+                $scope.products = response;  // Populate products array
 
-        // Mengambil semua produk (Jika ingin menampilkan daftar produk di halaman)
-        productService.getProducts()
-            .then(function (response) {
-                $scope.products = response;
+                // Check if each product is in the wishlist (based on localStorage)
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+                // Loop through products and set the wishlist status for each product
+                $scope.products.forEach(product => {
+                    const productInWishlist = wishlist.find(item => item._id === product._id);
+                    product.isInWishlist = !!productInWishlist;  // Set the wishlist status
+                });
             })
             .catch(function (error) {
                 console.error('Error fetching products:', error);
             });
 
-        // Toggle Wishlist
-        $scope.toggleWishlist = function () {
-            $scope.product.isInWishlist = !$scope.product.isInWishlist;
+        // Toggle Wishlist (Add/Remove product)
+        $scope.toggleWishlist = function (product) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const index = wishlist.findIndex(item => item._id === product._id);
+
+            if (index > -1) {
+                // Item is already in wishlist, remove it
+                wishlist.splice(index, 1);
+                product.isInWishlist = false;
+                alert('Item removed from wishlist!');
+            } else {
+                // Item not in wishlist, add it
+                wishlist.push(product);
+                product.isInWishlist = true;
+                alert('Item added to wishlist!');
+            }
+
+            // Save updated wishlist to localStorage
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
         };
 
-        // Add to Cart
-        $scope.addToCart = function () {
-            alert('Product added to cart!');
+        // Add to Cart (Mock function)
+        $scope.addToCart = function (product) {
+            alert('Product added to cart: ' + product.name);
         };
 
-        // Update Cart Quantity
+        // Update Cart Quantity (Mock function)
         $scope.updateCart = function () {
             console.log('Quantity updated to: ' + $scope.cartQuantity);
         };
 
-        // Submit Comment
+        // Submit Comment (Add new comment to product)
         $scope.submitComment = function (event) {
             if (event.key === 'Enter' && $scope.newComment.trim()) {
                 const newComment = { author: 'Guest', text: $scope.newComment };

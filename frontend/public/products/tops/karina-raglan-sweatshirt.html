@@ -11,128 +11,7 @@
     <script src="/frontend/src/product/product.controller.js"></script>
     <script src="/frontend/src/product/product.server.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .product-info {
-            margin-top: 20px;
-        }
-
-        .product-name {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .product-price {
-            font-size: 20px;
-            color: grey;
-        }
-
-        .wishlist-icon {
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        .wishlist-icon.active {
-            color: red;
-        }
-
-        .cart-actions {
-            margin-top: 20px;
-        }
-
-        .product-details {
-            margin-top: 30px;
-        }
-
-        .product-details h5 {
-            font-weight: bold;
-        }
-
-        .comment-section {
-            margin-top: 40px;
-        }
-
-        .comment-box {
-            margin-bottom: 20px;
-        }
-
-        .comment-box input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .comments-list {
-            margin-top: 20px;
-        }
-
-        .comment {
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
-
-        /* Custom button style for all buttons */
-        .btn {
-            background-color: #65141d !important;
-            border-color: #65141d;
-            color: white !important;
-            font-size: 18px !important;
-        }
-
-        .btn:hover,
-        .btn:focus,
-        .btn:active {
-            background-color: #5c0f17 !important;
-            border-color: #5c0f17 !important;
-            color: white !important;
-        }
-
-        /* Specific button for collapsing product details */
-        .btn-info {
-            background-color: #65141d !important;
-            border-color: #65141d !important;
-            color: white;
-        }
-
-        .btn-info:hover,
-        .btn-info:focus,
-        .btn-info:active {
-            background-color: #5c0f17 !important;
-            border-color: #5c0f17 !important;
-            color: white !important;
-        }
-
-        .col-md-6 {
-            background-color: #eddbbf;
-            padding: 20px;
-            border-radius: 5%;
-        }
-
-        img {
-            border-radius: 5%;
-        }
-
-        h2 {
-            font-size: 45px !important;
-        }
-
-        p {
-            font-size: 20px !important;
-        }
-
-        label {
-            font-size: 18px !important;
-        }
-
-        li {
-            font-size: 18px !important;
-        }
-    </style>
+    <link rel="stylesheet" href="/frontend/public/products/stylesheets.css">
 </head>
 
 <body ng-controller="ProductController">
@@ -146,20 +25,15 @@
                 <!-- Carousel -->
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{$index}}"
+                            ng-class="{'active': $index === 0}" ng-repeat="image in product.images" aria-current="true"
+                            aria-label="Slide {{$index + 1}}"></button>
                     </div>
 
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img ng-src="{{product.images[0]}}" class="d-block w-100"
-                                alt="Karina Raglan Sweatshirt">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img ng-src="{{product.images[1]}}" class="d-block w-100"
-                                alt="Karina Raglan Sweatshirt">
+                        <div class="carousel-item" ng-repeat="image in product.images"
+                            ng-class="{'active': $index === 0}" data-bs-interval="{{3000 + ($index * 1000)}}">
+                            <img ng-src="{{image}}" class="d-block w-100" alt="Product Image {{$index + 1}}">
                         </div>
                     </div>
 
@@ -175,6 +49,7 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+
 
             </div>
             <div class="col-md-6">
@@ -218,6 +93,7 @@
                             <li><strong>Cotton:</strong> 99%, Spandex: 1%</li>
                             <li><strong>Color:</strong> Blue</li>
                             <li><strong>Made in:</strong> Korea</li>
+
                         </ul>
                     </div>
                 </div>
@@ -244,13 +120,11 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // Define the AngularJS module and controller
         angular.module('productApp', [])
-            .controller('ProductController', function ($scope, productService) {
-                $scope.product = {};
-                $scope.cartQuantity = 1;
+            .controller('ProductController', function ($scope) {
+                // Product data
                 $scope.newComment = '';
-
-                // Fetch product data (for simplicity, data can be mocked here)
                 $scope.product = {
                     name: 'Karina Raglan Sweatshirt',
                     price: 315000,
@@ -262,23 +136,57 @@
                     comments: []
                 };
 
-                // Toggle Wishlist
+                // Initial quantity for the cart
+                $scope.cartQuantity = 1;
+
+                // Load wishlist from localStorage
+                $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
                 $scope.toggleWishlist = function () {
-                    $scope.product.isInWishlist = !$scope.product.isInWishlist;
+                    const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
+
+                    if (index > -1) {
+                        // Item already in wishlist, so remove it
+                        $scope.wishlist.splice(index, 1);
+                        $scope.product.isInWishlist = false;  // Set the icon to non-active (unwishlist)
+
+                        // Trigger alert after the color change
+                        setTimeout(function () {
+                            alert('Item removed from wishlist!');
+                        }, 100);
+                    } else {
+                        // Item not in wishlist, so add it
+                        $scope.wishlist.push(angular.copy($scope.product));
+                        $scope.product.isInWishlist = true;  // Set the icon to active (wishlist)
+
+                        // Trigger alert after the color change
+                        setTimeout(function () {
+                            alert('Item added to wishlist!');
+                        }, 100);
+                    }
+
+                    // Save the updated wishlist to localStorage
+                    localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
                 };
 
-                // Add to Cart
+                // Mock function for adding to cart
                 $scope.addToCart = function () {
                     alert('Product added to cart!');
                 };
 
-                // Update Cart Quantity
+                // Mock function for checkout process
+                $scope.checkout = function () {
+                    alert('Proceeding to checkout...');
+                };
+
+                // Decrease quantity function
                 $scope.decreaseQuantity = function () {
                     if ($scope.cartQuantity > 1) {
                         $scope.cartQuantity--;
                     }
                 };
 
+                // Increase quantity function
                 $scope.increaseQuantity = function () {
                     $scope.cartQuantity++;
                 };
@@ -290,16 +198,6 @@
                         $scope.product.comments.push(newComment);
                         $scope.newComment = ''; // Clear input
                     }
-                };
-
-                // Checkout function (for demo purpose)
-                $scope.checkout = function () {
-                    alert('Proceeding to checkout...');
-                };
-            })
-            .service('productService', function ($http) {
-                this.getProduct = function (id) {
-                    return $http.get('/api/products/' + id);
                 };
             });
     </script>

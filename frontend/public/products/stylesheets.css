@@ -1,0 +1,133 @@
+/* Global Styles */
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #f8f9fa;
+    /* Optional: a light background color */
+}
+
+h2 {
+    font-size: 45px !important;
+    /* Ensure large heading size */
+}
+
+p {
+    font-size: 20px !important;
+    /* Larger text for paragraphs */
+}
+
+label,
+li {
+    font-size: 18px !important;
+    /* Consistent font size for labels and list items */
+}
+
+/* Product Info Section */
+.product-info {
+    margin-top: 20px;
+}
+
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.product-price {
+    font-size: 20px;
+    color: grey;
+}
+
+/* Wishlist Icon Styles */
+.wishlist-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.wishlist-icon.active {
+    color: red;
+}
+
+/* Cart Actions */
+.cart-actions {
+    margin-top: 20px;
+}
+
+/* Product Details */
+.product-details {
+    margin-top: 30px;
+}
+
+.product-details h5 {
+    font-weight: bold;
+}
+
+/* Comment Section */
+.comment-section {
+    margin-top: 40px;
+}
+
+.comment-box {
+    margin-bottom: 20px;
+}
+
+.comment-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Comments List */
+.comments-list {
+    margin-top: 20px;
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #65141d !important;
+    border-color: #65141d !important;
+    color: white !important;
+    font-size: 18px !important;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+    background-color: #5c0f17 !important;
+    border-color: #5c0f17 !important;
+    color: white !important;
+}
+
+/* Specific Button for Collapsing Product Details */
+.btn-info {
+    background-color: #65141d !important;
+    border-color: #65141d !important;
+    color: white;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+    background-color: #5c0f17 !important;
+    border-color: #5c0f17 !important;
+    color: white !important;
+}
+
+/* Column Styles */
+.col-md-6 {
+    background-color: #eddbbf;
+    padding: 20px;
+    border-radius: 5%;
+}
+
+/* Image Styles */
+img {
+    border-radius: 5%;
+    width: 100%;
+    /* Ensure images fill the container */
+    height: auto;
+}

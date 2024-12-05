@@ -3,8 +3,13 @@ import { getWishlist, addItemToWishlist, removeItemFromWishlist } from "../contr
 
 const router = express.Router();
 
-router.get("/", getWishlist); // Retrieve the wishlist
-router.post("/", addItemToWishlist); // Add an item to the wishlist
-router.delete("/", removeItemFromWishlist); // Remove an item from the wishlist
+// Fetch wishlist for a specific user
+router.get("/:userId", getWishlist); // Retrieve the wishlist for a user
+
+// Add an item to the wishlist
+router.post("/", addItemToWishlist);
+
+// Remove an item from the wishlist
+router.delete("/", removeItemFromWishlist);
 
 export default router;

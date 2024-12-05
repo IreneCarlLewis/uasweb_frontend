@@ -1,14 +1,17 @@
 import Wishlist from "../models/wishlistModel.js";
 
-// Get all wishlist items (only userId and productId)
+// Get all wishlist items for a specific user
 export const getWishlist = async (req, res) => {
+    const { userId } = req.params; // Assuming userId is passed in the URL
+
     try {
-        const wishlist = await Wishlist.find().select("userId productId");
+        const wishlist = await Wishlist.find({ userId }).select("productId");
         res.status(200).json(wishlist);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // Add an item to the wishlist
 export const addItemToWishlist = async (req, res) => {
