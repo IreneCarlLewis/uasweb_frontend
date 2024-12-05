@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from 'bcrypt';
+import crypto from "crypto"
 
 // Mengambil daftar semua pengguna
 export const getUsers = async (req, res) => {
@@ -66,25 +67,25 @@ export const loginUser = async (req, res) => {
         // Cari user berdasarkan username
         const user = await User.findOne({ name });
         if (!user) {
-            console.log("User not found in database.");
             return res.status(404).json({ message: "User not found!" });
         }
-        console.log("User found in database:", user.name); // Log user yang ditemukan
 
         // Verifikasi password
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
-            console.log("Password mismatch.");
             return res.status(400).json({ message: "Invalid password!" });
         }
 
-        // Jika berhasil login
+        // Hasilkan token acak
+        const token = crypto.randomBytes(16).toString("hex");
+
+        // Kirimkan data user dan token ke client
         res.status(200).json({
             message: "Login successful!",
-            user: { name: user.name, email: user.email } // Jangan kirim password ke response
+            user: { name: user.name, email: user.email },
+            token, // Sertakan token dalam respons
         });
     } catch (error) {
-        console.error("Error during login:", error); // Log error detail
         res.status(500).json({ message: error.message });
     }
 };
