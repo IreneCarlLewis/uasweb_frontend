@@ -74,7 +74,7 @@
                         &#10084;
                     </span>
                     <button class="btn btn-primary ms-3" ng-click="addToCart()">Add to Cart</button>
-                    <button class="btn btn-success ms-3" ng-click="checkout()">Checkout</button>
+                    <button class="btn btn-success ms-3" ng-click="showCheckoutModal()">Checkout</button>
                 </div>
 
                 <!-- Collapsible Product Details Section -->
@@ -117,6 +117,28 @@
         </div>
     </div>
 
+    <!-- Modal for Checkout -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Product:</strong> {{product.name}}</p>
+                    <p><strong>Price:</strong> Rp {{product.price | number}}</p>
+                    <p><strong>Quantity:</strong> {{cartQuantity}}</p>
+                    <p><strong>Total:</strong> Rp {{getTotal() | number}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="confirmPayment()">Confirm Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>   
+
     <div id="footer-placeholder"></div>
 
     <script>
@@ -137,70 +159,114 @@
                     comments: []
                 };
 
-                // Initial quantity for the cart
-                $scope.cartQuantity = 1;
+       // Load wishlist and cart from localStorage
+       $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-                // Load wishlist from localStorage
-                $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        // Toggle Wishlist
+        $scope.toggleWishlist = function () {
+            const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
 
-                $scope.toggleWishlist = function () {
-                    const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
+            if (index > -1) {
+                // Item already in wishlist, so remove it
+                $scope.wishlist.splice(index, 1);
+                $scope.product.isInWishlist = false;
 
-                    if (index > -1) {
-                        // Item already in wishlist, so remove it
-                        $scope.wishlist.splice(index, 1);
-                        $scope.product.isInWishlist = false;  // Set the icon to non-active (unwishlist)
+                setTimeout(function () {
+                    alert('Item removed from wishlist!');
+                }, 100);
+            } else {
+                // Item not in wishlist, so add it
+                $scope.wishlist.push(angular.copy($scope.product));
+                $scope.product.isInWishlist = true;
 
-                        // Trigger alert after the color change
-                        setTimeout(function () {
-                            alert('Item removed from wishlist!');
-                        }, 100);
-                    } else {
-                        // Item not in wishlist, so add it
-                        $scope.wishlist.push(angular.copy($scope.product));
-                        $scope.product.isInWishlist = true;  // Set the icon to active (wishlist)
+                setTimeout(function () {
+                    alert('Item added to wishlist!');
+                }, 100);
+            }
 
-                        // Trigger alert after the color change
-                        setTimeout(function () {
-                            alert('Item added to wishlist!');
-                        }, 100);
-                    }
+            // Save the updated wishlist to localStorage
+            localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
+        };
 
-                    // Save the updated wishlist to localStorage
-                    localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
-                };
+        // Initial quantity for the cart
+        $scope.cartQuantity = 1;
 
-                // Mock function for adding to cart
-                $scope.addToCart = function () {
-                    alert('Product added to cart!');
-                };
-
-                // Mock function for checkout process
-                $scope.checkout = function () {
-                    alert('Proceeding to checkout...');
-                };
-
-                // Decrease quantity function
-                $scope.decreaseQuantity = function () {
-                    if ($scope.cartQuantity > 1) {
-                        $scope.cartQuantity--;
-                    }
-                };
-
-                // Increase quantity function
-                $scope.increaseQuantity = function () {
-                    $scope.cartQuantity++;
-                };
-
-                // Submit Comment
-                $scope.submitComment = function (event) {
-                    if (event.key === 'Enter' && $scope.newComment.trim()) {
-                        const newComment = { author: 'Guest', text: $scope.newComment };
-                        $scope.product.comments.push(newComment);
-                        $scope.newComment = ''; // Clear input
-                    }
-                };
+        // Checkout modal show function
+        $scope.showCheckoutModal = function () {
+            angular.element(document).ready(function () {
+                var modalElement = document.getElementById('checkoutModal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
             });
+        };
+
+
+
+        // Confirm Payment function
+        $scope.confirmPayment = function () {
+            // Simulate payment confirmation
+            alert('Payment successful. Your total is: Rp ' + ($scope.product.price * $scope.cartQuantity).toLocaleString());
+
+            // After payment, we can clear the cart or perform any other action
+            $scope.cartQuantity = 1;  // Reset quantity after payment
+            // Optionally clear cart here if using localStorage or another method
+        };
+
+        // Calculate total price
+        $scope.getTotal = function () {
+            return $scope.product.price * $scope.cartQuantity;
+        };
+
+        // Add to Cart function
+        $scope.addToCart = function () {
+            // Check if the product already exists in the cart
+            const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
+
+            if (existingProductIndex > -1) {
+                // If the product is already in the cart, update the quantity
+                $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
+            } else {
+                // If the product is not in the cart, add it
+                $scope.cart.push({
+                    product: angular.copy($scope.product),
+                    quantity: $scope.cartQuantity
+                });
+            }
+
+            // Save the updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+
+            // Notify the user that the product was added to the cart
+            alert('Product added to cart!');
+        };
+
+        // Checkout function
+        $scope.checkout = function () {
+            alert('Proceeding to checkout...');
+        };
+
+        // Decrease quantity function
+        $scope.decreaseQuantity = function () {
+            if ($scope.cartQuantity > 1) {
+                $scope.cartQuantity--;
+            }
+        };
+
+        // Increase quantity function
+        $scope.increaseQuantity = function () {
+            $scope.cartQuantity++;
+        };
+
+        // Submit Comment
+        $scope.submitComment = function (event) {
+            if (event.key === 'Enter' && $scope.newComment.trim()) {
+                const newComment = { author: 'Guest', text: $scope.newComment };
+                $scope.product.comments.push(newComment);
+                $scope.newComment = ''; // Clear input
+            }
+        };
+    });
     </script>
     <script>
         fetch('/frontend/public/navigation/navbar.html')
