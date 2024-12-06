@@ -154,214 +154,206 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="footer-placeholder"></div>
+    <div id="footer-placeholder"></div>
 
-        <script>
-            angular.module('productApp', [])
-                .controller('ProductController', function ($scope) {
-                    // Product data
-                    $scope.newComment = '';
-                    $scope.product = {
-                        name: 'Ann Pocketed Pleated Tube Top Mini Dress',
-                        price: 650000,
-                        images: [
-                            '/frontend/public/images/products/dress/W_1.jpg',
-                            '/frontend/public/images/products/dress/W_2.jpg',
-                            '/frontend/public/images/products/dress/W_3.jpg'
-                        ],
-                        isInWishlist: false,
-                        comments: JSON.parse(localStorage.getItem('productComments')) || []
-                    };
+    <script>
+        angular.module('productApp', [])
+            .controller('ProductController', function ($scope) {
+                // Product data
+                $scope.newComment = '';
+                $scope.product = {
+                    name: 'Ann Pocketed Pleated Tube Top Mini Dress',
+                    price: 650000,
+                    images: [
+                        '/frontend/public/images/products/dress/W_1.jpg',
+                        '/frontend/public/images/products/dress/W_2.jpg',
+                        '/frontend/public/images/products/dress/W_3.jpg'
+                    ],
+                    isInWishlist: false,
+                    comments: JSON.parse(localStorage.getItem('productComments')) || []
+                };
 
-                    // Load wishlist and cart from localStorage
-                    $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-                    $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
+                // Load wishlist and cart from localStorage
+                $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-                    // Toggle Wishlist
-                    $scope.toggleWishlist = function () {
-                        const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
+                // Toggle Wishlist
+                $scope.toggleWishlist = function () {
+                    const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
 
-                        if (index > -1) {
-                            // Item already in wishlist, so remove it
-                            $scope.wishlist.splice(index, 1);
-                            $scope.product.isInWishlist = false;
+                    if (index > -1) {
+                        // Item already in wishlist, so remove it
+                        $scope.wishlist.splice(index, 1);
+                        $scope.product.isInWishlist = false;
 
-                            setTimeout(function () {
-                                alert('Item removed from wishlist!');
-                            }, 100);
-                        } else {
-                            // Item not in wishlist, so add it
-                            $scope.wishlist.push(angular.copy($scope.product));
-                            $scope.product.isInWishlist = true;
+                        setTimeout(function () {
+                            alert('Item removed from wishlist!');
+                        }, 100);
+                    } else {
+                        // Item not in wishlist, so add it
+                        $scope.wishlist.push(angular.copy($scope.product));
+                        $scope.product.isInWishlist = true;
 
-                            setTimeout(function () {
-                                alert('Item added to wishlist!');
-                            }, 100);
-                        }
+                        setTimeout(function () {
+                            alert('Item added to wishlist!');
+                        }, 100);
+                    }
 
-                        // Save the updated wishlist to localStorage
-                        localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
-                    };
+                    // Save the updated wishlist to localStorage
+                    localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
+                };
 
-                    // Initial quantity for the cart
-                    $scope.cartQuantity = 1;
+                // Initial quantity for the cart
+                $scope.cartQuantity = 1;
 
-                    // Checkout modal show function
-                    $scope.showCheckoutModal = function () {
-                        angular.element(document).ready(function () {
-                            var modalElement = document.getElementById('checkoutModal');
-                            var modal = new bootstrap.Modal(modalElement);
-                            modal.show();
+                // Checkout modal show function
+                $scope.showCheckoutModal = function () {
+                    angular.element(document).ready(function () {
+                        var modalElement = document.getElementById('checkoutModal');
+                        var modal = new bootstrap.Modal(modalElement);
+                        modal.show();
+                    });
+                };
+
+
+
+                // Confirm Payment function
+                $scope.confirmPayment = function () {
+                    // Simulate payment confirmation
+                    alert('Payment successful. Your total is: Rp ' + ($scope.product.price * $scope.cartQuantity).toLocaleString());
+
+                    // After payment, we can clear the cart or perform any other action
+                    $scope.cartQuantity = 1;  // Reset quantity after payment
+                    // Optionally clear cart here if using localStorage or another method
+                };
+
+                // Calculate total price
+                $scope.getTotal = function () {
+                    return $scope.product.price * $scope.cartQuantity;
+                };
+
+                // Add to Cart function
+                $scope.addToCart = function () {
+                    // Check if the product already exists in the cart
+                    const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
+
+                    if (existingProductIndex > -1) {
+                        // If the product is already in the cart, update the quantity
+                        $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
+                    } else {
+                        // If the product is not in the cart, add it
+                        $scope.cart.push({
+                            product: angular.copy($scope.product),
+                            quantity: $scope.cartQuantity
                         });
-                    };
+                    }
 
+                    // Save the updated cart to localStorage
+                    localStorage.setItem('cart', JSON.stringify($scope.cart));
 
+                    // Notify the user that the product was added to the cart
+                    alert('Product added to cart!');
+                };
 
-                    // Confirm Payment function
-                    $scope.confirmPayment = function () {
-                        // Simulate payment confirmation
-                        alert('Payment successful. Your total is: Rp ' + ($scope.product.price * $scope.cartQuantity).toLocaleString());
+                // Checkout function
+                $scope.checkout = function () {
+                    alert('Proceeding to checkout...');
+                };
 
-                        // After payment, we can clear the cart or perform any other action
-                        $scope.cartQuantity = 1;  // Reset quantity after payment
-                        // Optionally clear cart here if using localStorage or another method
-                    };
+                // Decrease quantity function
+                $scope.decreaseQuantity = function () {
+                    if ($scope.cartQuantity > 1) {
+                        $scope.cartQuantity--;
+                    }
+                };
 
-                    // Calculate total price
-                    $scope.getTotal = function () {
-                        return $scope.product.price * $scope.cartQuantity;
-                    };
+                // Increase quantity function
+                $scope.increaseQuantity = function () {
+                    $scope.cartQuantity++;
+                };
 
-                    // Add to Cart function
-                    $scope.addToCart = function () {
-                        // Check if the product already exists in the cart
-                        const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
+                //save comment
+                $scope.saveComments = function () {
+                    localStorage.setItem('productComments', JSON.stringify($scope.product.comments));
+                };
 
-                        if (existingProductIndex > -1) {
-                            // If the product is already in the cart, update the quantity
-                            $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
-                        } else {
-                            // If the product is not in the cart, add it
-                            $scope.cart.push({
-                                product: angular.copy($scope.product),
-                                quantity: $scope.cartQuantity
-                            });
+                // Submit Comment
+                $scope.submitComment = function (event) {
+                    if (event.key === 'Enter' && $scope.newComment.trim()) {
+                        const user = JSON.parse(localStorage.getItem('user'));
+
+                        if (!user || !user.name) {
+                            alert('You must be logged in to post a comment.');
+                            return;
                         }
 
-                        // Save the updated cart to localStorage
-                        localStorage.setItem('cart', JSON.stringify($scope.cart));
+                        const newComment = {
+                            _id: new Date().getTime(),
+                            author: user.name,
+                            text: $scope.newComment
+                        };
 
-                        // Notify the user that the product was added to the cart
-                        alert('Product added to cart!');
-                    };
+                        $scope.product.comments.push(newComment);
+                        $scope.saveComments();
+                        $scope.newComment = '';
+                    }
+                };
 
-                    // Checkout function
-                    $scope.checkout = function () {
-                        alert('Proceeding to checkout...');
-                    };
+                // Edit Comment
+                $scope.editComment = function (index) {
 
-                    // Decrease quantity function
-                    $scope.decreaseQuantity = function () {
-                        if ($scope.cartQuantity > 1) {
-                            $scope.cartQuantity--;
-                        }
-                    };
+                    $scope.editedCommentText = $scope.product.comments[index].text;
+                    $scope.editingIndex = index;
+                };
 
-                    // Increase quantity function
-                    $scope.increaseQuantity = function () {
-                        $scope.cartQuantity++;
-                    };
+                $scope.saveEditedComment = function () {
+                    if ($scope.editedCommentText.trim()) {
+                        $scope.product.comments[$scope.editingIndex].text = $scope.editedCommentText;
 
-                    // Save comments to localStorage whenever they change
-                    $scope.saveComments = function () {
-                        localStorage.setItem('productComments', JSON.stringify($scope.product.comments));
-                    };
+                        $scope.saveComments();
 
-                    // Submit Comment
-                    $scope.submitComment = function (event) {
-                        if (event.key === 'Enter' && $scope.newComment.trim()) {
-                            const user = JSON.parse(localStorage.getItem('user'));  // Retrieve the logged-in user's info from localStorage
-
-                            if (!user || !user.name) {
-                                alert('You must be logged in to post a comment.');
-                                return;
-                            }
-
-                            const newComment = {
-                                _id: new Date().getTime(),  // Use a unique ID based on timestamp
-                                author: user.name,          // Use the logged-in user's name
-                                text: $scope.newComment
-                            };
-
-                            // Add the comment to the list
-                            $scope.product.comments.push(newComment);
-
-                            // Save the updated comments to localStorage
-                            $scope.saveComments();
-
-                            // Clear the comment input field
-                            $scope.newComment = '';
-                        }
-                    };
-
-                    // Edit Comment
-                    $scope.editComment = function (index) {
-                        // Save the comment's original text to be used for editing
-                        $scope.editedCommentText = $scope.product.comments[index].text;  // Bind the current text to the input field
-                        $scope.editingIndex = index;  // Store the index of the comment being edited
-                    };
-
-                    $scope.saveEditedComment = function () {
-                        if ($scope.editedCommentText.trim()) {
-                            // Perbarui teks komentar pada array
-                            $scope.product.comments[$scope.editingIndex].text = $scope.editedCommentText;
-
-                            // Simpan komentar yang diperbarui ke localStorage
-                            $scope.saveComments();
-
-                            // Reset variabel edit setelah menyimpan
-                            $scope.editingIndex = null;
-                            $scope.editedCommentText = '';
-
-                            // Perbarui UI dengan komentar terbaru
-                            $scope.$applyAsync();
-                        } else {
-                            alert("Komentar tidak boleh kosong!");
-                        }
-                    };
-
-
-                    $scope.cancelEdit = function () {
-                        // Reset the editing mode without saving changes
                         $scope.editingIndex = null;
-                        $scope.editedCommentText = ''; // Clear the edited text
-                    };
+                        $scope.editedCommentText = '';
 
-                    // Delete Comment
-                    $scope.deleteComment = function (index) {
-                        $scope.product.comments.splice(index, 1);
-                        $scope.saveComments(); // Save updated comments to localStorage
-                    };
-                });
+                        $scope.$applyAsync();
+                    } else {
+                        alert("Komentar tidak boleh kosong!");
+                    }
+                };
 
-        </script>
 
-        <script>
-            fetch('/frontend/public/navigation/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading navbar:', error));
+                $scope.cancelEdit = function () {
+                    // Reset the editing mode without saving changes
+                    $scope.editingIndex = null;
+                    $scope.editedCommentText = ''; // Clear the edited text
+                };
 
-            fetch('/frontend/public/navigation/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading footer:', error));
-        </script>
+                // Delete Comment
+                $scope.deleteComment = function (index) {
+                    $scope.product.comments.splice(index, 1);
+                    $scope.saveComments(); // Save updated comments to localStorage
+                };
+            });
+
+    </script>
+
+    <script>
+        fetch('/frontend/public/navigation/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        fetch('/frontend/public/navigation/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
 </body>
 
 </html>

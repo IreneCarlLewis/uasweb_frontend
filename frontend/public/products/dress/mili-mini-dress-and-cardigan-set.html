@@ -104,186 +104,252 @@
         <!-- Comments Section -->
         <div class="comment-section">
             <h3>Comments</h3>
+
+            <!-- Comment Input Box -->
             <div class="comment-box">
                 <input type="text" ng-model="newComment" placeholder="Leave a comment..."
-                    ng-keyup="submitComment($event)">
+                    ng-keyup="submitComment($event)" class="form-control">
             </div>
 
             <div class="comments-list">
-                <div class="comment" ng-repeat="comment in product.comments">
-                    <p><strong>{{comment.author}}:</strong> {{comment.text}}</p>
+                <div class="comment" ng-repeat="comment in product.comments track by comment._id">
+                    <!-- Tampilkan komentar -->
+                    <div ng-if="editingIndex !== $index">
+                        <p><strong>{{comment.author}}:</strong> {{comment.text}}</p>
+                        <button class="btn btn-warning btn-sm" ng-click="editComment($index)">Edit</button>
+                        <button class="btn btn-danger btn-sm" ng-click="deleteComment(comment._id)">Delete</button>
+                    </div>
+
+                    <!-- Mode edit -->
+                    <div ng-if="editingIndex === $index">
+                        <input type="text" ng-model="editedCommentText" class="form-control" />
+                        <button class="btn btn-primary btn-sm" ng-click="saveEditedComment()">Save</button>
+                        <button class="btn btn-secondary btn-sm" ng-click="cancelEdit()">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Modal for Checkout -->
-    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Product:</strong> {{product.name}}</p>
-                    <p><strong>Price:</strong> Rp {{product.price | number}}</p>
-                    <p><strong>Quantity:</strong> {{cartQuantity}}</p>
-                    <p><strong>Total:</strong> Rp {{getTotal() | number}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" ng-click="confirmPayment()">Confirm Payment</button>
+            <!-- Modal for Checkout -->
+            <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Product:</strong> {{product.name}}</p>
+                            <p><strong>Price:</strong> Rp {{product.price | number}}</p>
+                            <p><strong>Quantity:</strong> {{cartQuantity}}</p>
+                            <p><strong>Total:</strong> Rp {{getTotal() | number}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" ng-click="confirmPayment()">Confirm
+                                Payment</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div id="footer-placeholder"></div>
+            <div id="footer-placeholder"></div>
 
-    <script>
-        // Define the AngularJS module and controller
-        angular.module('productApp', [])
-            .controller('ProductController', function ($scope) {
-                // Product data
-                $scope.newComment = '';
-                $scope.product = {
-                    name: 'Mili Mini Dress and Cardigan Set',
-                    price: 580000,
-                    images: [
-                        '/frontend/public/images/products/dress/F_1.jpg',
-                        '/frontend/public/images/products/dress/F_2.jpg',
-                        '/frontend/public/images/products/dress/F_3.jpg',
-                        '/frontend/public/images/products/dress/F_4.jpg'
-                    ],
-                    isInWishlist: false,
-                    comments: []
-                };
+            <script>
+                // Define the AngularJS module and controller
+                angular.module('productApp', [])
+                    .controller('ProductController', function ($scope) {
+                        // Product data
+                        $scope.newComment = '';
+                        $scope.product = {
+                            name: 'Mili Mini Dress and Cardigan Set',
+                            price: 580000,
+                            images: [
+                                '/frontend/public/images/products/dress/F_1.jpg',
+                                '/frontend/public/images/products/dress/F_2.jpg',
+                                '/frontend/public/images/products/dress/F_3.jpg',
+                                '/frontend/public/images/products/dress/F_4.jpg'
+                            ],
+                            isInWishlist: false,
+                            comments: []
+                        };
 
-         // Load wishlist and cart from localStorage
-         $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        // Load wishlist and cart from localStorage
+                        $scope.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                        $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        // Toggle Wishlist
-        $scope.toggleWishlist = function () {
-            const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
+                        // Toggle Wishlist
+                        $scope.toggleWishlist = function () {
+                            const index = $scope.wishlist.findIndex(item => item.name === $scope.product.name);
 
-            if (index > -1) {
-                // Item already in wishlist, so remove it
-                $scope.wishlist.splice(index, 1);
-                $scope.product.isInWishlist = false;
+                            if (index > -1) {
+                                // Item already in wishlist, so remove it
+                                $scope.wishlist.splice(index, 1);
+                                $scope.product.isInWishlist = false;
 
-                setTimeout(function () {
-                    alert('Item removed from wishlist!');
-                }, 100);
-            } else {
-                // Item not in wishlist, so add it
-                $scope.wishlist.push(angular.copy($scope.product));
-                $scope.product.isInWishlist = true;
+                                setTimeout(function () {
+                                    alert('Item removed from wishlist!');
+                                }, 100);
+                            } else {
+                                // Item not in wishlist, so add it
+                                $scope.wishlist.push(angular.copy($scope.product));
+                                $scope.product.isInWishlist = true;
 
-                setTimeout(function () {
-                    alert('Item added to wishlist!');
-                }, 100);
-            }
+                                setTimeout(function () {
+                                    alert('Item added to wishlist!');
+                                }, 100);
+                            }
 
-            // Save the updated wishlist to localStorage
-            localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
-        };
+                            // Save the updated wishlist to localStorage
+                            localStorage.setItem('wishlist', JSON.stringify($scope.wishlist));
+                        };
 
-        // Initial quantity for the cart
-        $scope.cartQuantity = 1;
+                        // Initial quantity for the cart
+                        $scope.cartQuantity = 1;
 
-        // Checkout modal show function
-        $scope.showCheckoutModal = function () {
-            angular.element(document).ready(function () {
-                var modalElement = document.getElementById('checkoutModal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
-            });
-        };
+                        // Checkout modal show function
+                        $scope.showCheckoutModal = function () {
+                            angular.element(document).ready(function () {
+                                var modalElement = document.getElementById('checkoutModal');
+                                var modal = new bootstrap.Modal(modalElement);
+                                modal.show();
+                            });
+                        };
 
 
 
-        // Confirm Payment function
-        $scope.confirmPayment = function () {
-            // Simulate payment confirmation
-            alert('Payment successful. Your total is: Rp ' + ($scope.product.price * $scope.cartQuantity).toLocaleString());
+                        // Confirm Payment function
+                        $scope.confirmPayment = function () {
+                            // Simulate payment confirmation
+                            alert('Payment successful. Your total is: Rp ' + ($scope.product.price * $scope.cartQuantity).toLocaleString());
 
-            // After payment, we can clear the cart or perform any other action
-            $scope.cartQuantity = 1;  // Reset quantity after payment
-            // Optionally clear cart here if using localStorage or another method
-        };
+                            // After payment, we can clear the cart or perform any other action
+                            $scope.cartQuantity = 1;  // Reset quantity after payment
+                            // Optionally clear cart here if using localStorage or another method
+                        };
 
-        // Calculate total price
-        $scope.getTotal = function () {
-            return $scope.product.price * $scope.cartQuantity;
-        };
+                        // Calculate total price
+                        $scope.getTotal = function () {
+                            return $scope.product.price * $scope.cartQuantity;
+                        };
 
-        // Add to Cart function
-        $scope.addToCart = function () {
-            // Check if the product already exists in the cart
-            const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
+                        // Add to Cart function
+                        $scope.addToCart = function () {
+                            // Check if the product already exists in the cart
+                            const existingProductIndex = $scope.cart.findIndex(item => item.product.name === $scope.product.name);
 
-            if (existingProductIndex > -1) {
-                // If the product is already in the cart, update the quantity
-                $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
-            } else {
-                // If the product is not in the cart, add it
-                $scope.cart.push({
-                    product: angular.copy($scope.product),
-                    quantity: $scope.cartQuantity
-                });
-            }
+                            if (existingProductIndex > -1) {
+                                // If the product is already in the cart, update the quantity
+                                $scope.cart[existingProductIndex].quantity += $scope.cartQuantity;
+                            } else {
+                                // If the product is not in the cart, add it
+                                $scope.cart.push({
+                                    product: angular.copy($scope.product),
+                                    quantity: $scope.cartQuantity
+                                });
+                            }
 
-            // Save the updated cart to localStorage
-            localStorage.setItem('cart', JSON.stringify($scope.cart));
+                            // Save the updated cart to localStorage
+                            localStorage.setItem('cart', JSON.stringify($scope.cart));
 
-            // Notify the user that the product was added to the cart
-            alert('Product added to cart!');
-        };
+                            // Notify the user that the product was added to the cart
+                            alert('Product added to cart!');
+                        };
 
-        // Checkout function
-        $scope.checkout = function () {
-            alert('Proceeding to checkout...');
-        };
+                        // Checkout function
+                        $scope.checkout = function () {
+                            alert('Proceeding to checkout...');
+                        };
 
-        // Decrease quantity function
-        $scope.decreaseQuantity = function () {
-            if ($scope.cartQuantity > 1) {
-                $scope.cartQuantity--;
-            }
-        };
+                        // Decrease quantity function
+                        $scope.decreaseQuantity = function () {
+                            if ($scope.cartQuantity > 1) {
+                                $scope.cartQuantity--;
+                            }
+                        };
 
-        // Increase quantity function
-        $scope.increaseQuantity = function () {
-            $scope.cartQuantity++;
-        };
+                        // Increase quantity function
+                        $scope.increaseQuantity = function () {
+                            $scope.cartQuantity++;
+                        };
 
-        // Submit Comment
-        $scope.submitComment = function (event) {
-            if (event.key === 'Enter' && $scope.newComment.trim()) {
-                const newComment = { author: 'Guest', text: $scope.newComment };
-                $scope.product.comments.push(newComment);
-                $scope.newComment = ''; // Clear input
-            }
-        };
-    });
-    </script>
-    <script>
-        fetch('/frontend/public/navigation/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading navbar:', error));
+                        //save comment
+                        $scope.saveComments = function () {
+                            localStorage.setItem('productComments', JSON.stringify($scope.product.comments));
+                        };
 
-        fetch('/frontend/public/navigation/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
-    </script>
+                        // Submit Comment
+                        $scope.submitComment = function (event) {
+                            if (event.key === 'Enter' && $scope.newComment.trim()) {
+                                const user = JSON.parse(localStorage.getItem('user'));
+
+                                if (!user || !user.name) {
+                                    alert('You must be logged in to post a comment.');
+                                    return;
+                                }
+
+                                const newComment = {
+                                    _id: new Date().getTime(),
+                                    author: user.name,
+                                    text: $scope.newComment
+                                };
+
+                                $scope.product.comments.push(newComment);
+                                $scope.saveComments();
+                                $scope.newComment = '';
+                            }
+                        };
+
+                        // Edit Comment
+                        $scope.editComment = function (index) {
+
+                            $scope.editedCommentText = $scope.product.comments[index].text;
+                            $scope.editingIndex = index;
+                        };
+
+                        $scope.saveEditedComment = function () {
+                            if ($scope.editedCommentText.trim()) {
+                                $scope.product.comments[$scope.editingIndex].text = $scope.editedCommentText;
+
+                                $scope.saveComments();
+
+                                $scope.editingIndex = null;
+                                $scope.editedCommentText = '';
+
+                                $scope.$applyAsync();
+                            } else {
+                                alert("Komentar tidak boleh kosong!");
+                            }
+                        };
+
+
+                        $scope.cancelEdit = function () {
+                            $scope.editingIndex = null;
+                            $scope.editedCommentText = ''; // Clear the edited text
+                        };
+
+                        // Delete Comment
+                        $scope.deleteComment = function (index) {
+                            $scope.product.comments.splice(index, 1);
+                            $scope.saveComments();
+                        };
+                    });
+            </script>
+            <script>
+                fetch('/frontend/public/navigation/navbar.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('navbar-placeholder').innerHTML = data;
+                    })
+                    .catch(error => console.error('Error loading navbar:', error));
+
+                fetch('/frontend/public/navigation/footer.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('footer-placeholder').innerHTML = data;
+                    })
+                    .catch(error => console.error('Error loading footer:', error));
+            </script>
 </body>
 
 </html>
