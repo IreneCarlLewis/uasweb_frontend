@@ -110,50 +110,41 @@
                     ng-keyup="submitComment($event)" class="form-control">
             </div>
 
+            <!-- Comments List -->
             <div class="comments-list">
-                <div class="comment" ng-repeat="comment in product.comments track by comment._id">
-                    <!-- Tampilkan komentar -->
-                    <div ng-if="editingIndex !== $index">
-                        <p><strong>{{comment.author}}:</strong> {{comment.text}}</p>
-                        <button class="btn btn-warning btn-sm" ng-click="editComment($index)">Edit</button>
-                        <button class="btn btn-danger btn-sm" ng-click="deleteComment(comment._id)">Delete</button>
-                    </div>
-
-                    <!-- Mode edit -->
-                    <div ng-if="editingIndex === $index">
-                        <input type="text" ng-model="editedCommentText" class="form-control" />
-                        <button class="btn btn-primary btn-sm" ng-click="saveEditedComment()">Save</button>
-                        <button class="btn btn-secondary btn-sm" ng-click="cancelEdit()">Cancel</button>
-                    </div>
+                <div class="comment" ng-repeat="comment in product.comments">
+                    <p><strong>{{comment.author}}:</strong> {{comment.text}}</p>
+                    <button class="btn btn-warning btn-sm" ng-click="editComment($index, comment.text)">Edit</button>
+                    <button class="btn btn-danger btn-sm" ng-click="deleteComment($index)">Delete</button>
                 </div>
             </div>
+        </div>
 
 
-
-            <!-- Modal for Checkout -->
-            <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Product:</strong> {{product.name}}</p>
-                            <p><strong>Price:</strong> Rp {{product.price | number}}</p>
-                            <p><strong>Quantity:</strong> {{cartQuantity}}</p>
-                            <p><strong>Total:</strong> Rp {{getTotal() | number}}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" ng-click="confirmPayment()">Confirm
-                                Payment</button>
-                        </div>
+        <!-- Modal for Checkout -->
+        <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Product:</strong> {{product.name}}</p>
+                        <p><strong>Price:</strong> Rp {{product.price | number}}</p>
+                        <p><strong>Quantity:</strong> {{cartQuantity}}</p>
+                        <p><strong>Total:</strong> Rp {{getTotal() | number}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" ng-click="confirmPayment()">Confirm
+                            Payment</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div id="footer-placeholder"></div>
@@ -274,15 +265,10 @@
                     $scope.cartQuantity++;
                 };
 
-                //save comment
-                $scope.saveComments = function () {
-                    localStorage.setItem('productComments', JSON.stringify($scope.product.comments));
-                };
-
                 // Submit Comment
                 $scope.submitComment = function (event) {
                     if (event.key === 'Enter' && $scope.newComment.trim()) {
-                        const user = JSON.parse(localStorage.getItem('user'));
+                        const user = JSON.parse(localStorage.getItem('user'));  // Retrieve the logged-in user's info from localStorage
 
                         if (!user || !user.name) {
                             alert('You must be logged in to post a comment.');
@@ -290,44 +276,28 @@
                         }
 
                         const newComment = {
-                            _id: new Date().getTime(),
-                            author: user.name,
+                            _id: new Date().getTime(),  // Use a unique ID based on timestamp
+                            author: user.name,          // Use the logged-in user's name
                             text: $scope.newComment
                         };
 
+                        // Add the comment to the list
                         $scope.product.comments.push(newComment);
+
+                        // Save the updated comments to localStorage
                         $scope.saveComments();
+
+                        // Clear the comment input field
                         $scope.newComment = '';
                     }
                 };
 
                 // Edit Comment
-                $scope.editComment = function (index) {
-
-                    $scope.editedCommentText = $scope.product.comments[index].text;
-                    $scope.editingIndex = index;
-                };
-
-                $scope.saveEditedComment = function () {
-                    if ($scope.editedCommentText.trim()) {
-                        $scope.product.comments[$scope.editingIndex].text = $scope.editedCommentText;
-
-                        $scope.saveComments();
-
-                        $scope.editingIndex = null;
-                        $scope.editedCommentText = '';
-
-                        $scope.$applyAsync();
-                    } else {
-                        alert("Komentar tidak boleh kosong!");
+                $scope.editComment = function (index, updatedText) {
+                    if (updatedText.trim()) {
+                        $scope.product.comments[index].commentText = updatedText;
+                        $scope.saveComments(); // Save updated comments to localStorage
                     }
-                };
-
-
-                $scope.cancelEdit = function () {
-                    // Reset the editing mode without saving changes
-                    $scope.editingIndex = null;
-                    $scope.editedCommentText = ''; // Clear the edited text
                 };
 
                 // Delete Comment
@@ -336,6 +306,7 @@
                     $scope.saveComments(); // Save updated comments to localStorage
                 };
             });
+
 
     </script>
 
